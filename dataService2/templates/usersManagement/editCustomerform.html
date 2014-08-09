@@ -1,0 +1,86 @@
+<html>
+<head>
+	<meta charset="UTF-8"/>
+	<title>编辑客户信息</title>
+</head>
+<body>
+<center>
+	{% for customer in customerInfo %}
+	<form action="../editCustomer" method="POST">
+	<table width='70%'>
+		<tr>
+			<td>客户名</td>
+			<td><input type='text' name='name' value='{{customer.name}}'/></td>
+		</tr>
+		<tr>
+			<td>联系人</td>
+			<td><input type='text' name='contactName' value='{{customer.contactName}}'/></td>
+		</tr>
+		<tr>
+			<td>联系人电话</td>
+			<td><input type='text' name='tel' value='{{customer.tel}}'/></td>
+		</tr>
+		<tr>
+			<td>联系人邮箱</td>
+			<td><input type='text' name='email' value='{{customer.email}}'/></td>
+		</tr>
+		<tr>
+			<td>联系人身份证号</td>
+			<td><input type='text' name='identification' value='{{customer.identification}}'/></td>
+		</tr>
+		<tr>
+			<td>联系人地址</td>
+			<td><input type='text' name='address' value='{{customer.address}}'/></td>
+		</tr>
+		<tr>
+			<td>联系人邮编</td>
+			<td><input type='text' name='post' value='{{customer.post}}'/></td>
+		</tr>
+		<tr>
+			<td>创建时间</td>
+			<td>{{customer.createDate}}</td>
+		</tr>
+		<tr>
+			<td>注销时间</td>
+			<td>{{customer.cancelDate}}</td>
+		</tr>
+		<tr>
+			<td>是否是企业用户</td>
+			<td>
+				<select name="isEnterprise">
+				{% ifequal customer.is_enterprise "0" %}	
+					<option value="0" selected="selected">否</option>
+					<option value="1">是</option>
+				{% else %}
+					<option value="0">否</option>
+					<option value="1" selected="selected">是</option>
+				{% endifequal %}
+				</select>
+			</td>
+		</tr>
+		<tr>
+			<td>客户级别</td>
+			<td>
+			{% for customerGroup in customerGroups %}
+				{% ifequal customer.customerGroupId customerGroup.id %}
+				<input type='radio' name='customerGroup' value='{{customerGroup.id}}' checked='checked'/>{{customerGroup.name}}
+				{% else %}
+				<input type='radio' name='customerGroup' value='{{customerGroup.id}}'/>{{customerGroup.name}}
+				{% endifequal %}
+			{% endfor %}
+			</td>
+		</tr>
+		<tr>
+			<td><input type="hidden" name='id' value='{{customer.id}}'/> </td>
+			<td>
+				<input type="submit" name="update " value="确定"/>
+				<input type="button" name="return" value="取消" onClick="history.back()"/>
+			</td>
+		</tr>
+	</table>
+	</form>
+	{% endfor %}
+	
+</center>
+</body>
+</html>

@@ -1,0 +1,57 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    {% load staticfiles %}
+    <title>message</title>
+    <link rel="stylesheet" type="text/css" href="{% static "css.css" %}"></link>
+    <script type="text/javascript" src="{% static "js.js" %}"></script>
+</head>
+<body>
+<style>
+#postit{
+position:absolute;
+width:300;
+background-color:lightyellow;
+border:1px solid black;
+visibility:hidden;
+z-index:100;
+cursor:hand;
+}
+</style>
+<div id="postit" style="left:150px;top:150px">
+<div align="right"><a href="javascript:closeit()">closes</a></div>
+<p>message</p>
+<p>message</p>
+</div>
+<script>
+var once_per_browser=0
+var ns4=document.layers
+var ie4=document.all
+var ns6=document.getElementById && !document.all
+if (ns4)
+  crossobj=document.layers.postit
+else if (ie4||ns6)
+  crossobj=ns6? document.getElementById("postit") : document.all.postit
+function closeit(){
+  if (ie4||ns6)
+    crossobj.style.visibility="hidden"
+  else if (ns4)
+    crossobj.visibility="hide"
+}
+function showit(){
+  if (ie4||ns6)
+    crossobj.style.visibility="visible"
+  else if (ns4)
+    crossobj.visibility="show"
+}
+
+if (once_per_browser)
+  showornot()
+else
+  showit()
+</script>
+
+
+</body>
+</html>

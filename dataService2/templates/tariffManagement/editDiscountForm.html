@@ -1,0 +1,44 @@
+<html>
+<head>
+	<title>编辑优惠信息</title>
+</head>
+<body>
+<center>
+{% for discount in discountInfo %}
+<form method='POST' action='../editDiscount'>
+<table widht=70%>
+	<tr>
+		<td>折扣</td>
+		<td><input type='number' step='any' name='discountValue' value='{{discount.discountValue}}'  required="required"/></td>
+	</tr>
+	<tr>
+		<td>是否激活</td>
+		<td>
+			{% ifequal discount.isActive '0' %}
+			<input type='radio' name='isActive' value='0' checked='checked'/>否
+			<input type='radio' name='isActive' value='1'/>是
+			{% else %}
+			<input type='radio' name='isActive' value='0' />否
+			<input type='radio' name='isActive' value='1' checked='checked'/>是
+			{% endifequal %}
+		</td>
+	</tr>
+	<tr>
+		<td>说明</td>
+		<td>
+			<textarea rows="2" cols="30" name='comment'>{{discount.comment}}</textarea>
+		</td>
+	</tr>
+	<tr>
+		<td><input type="hidden" name='id' value='{{discount.id}}'/> </td>
+		<td>
+			<input type="submit" name="update " value="确定"/>
+				<input type="button" name="return" value="取消" onClick="history.back()"/>
+		</td>
+	</tr>
+</table>
+</form>
+{% endfor %}
+</center>
+</body>
+</html>

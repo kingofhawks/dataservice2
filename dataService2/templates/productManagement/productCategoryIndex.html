@@ -1,0 +1,44 @@
+<html>
+<head>
+	<meta charset="UTF-8"/>
+	<title>产品种类列表</title>
+</head>
+<body>
+<center>
+<table width="80%">
+	<tr>
+		<td>产品种类</td>
+		<td>服务类型</td>
+		<td>说明</td>
+		<td></td>
+	</tr>
+	<form method='post' action='addProductCategory'>
+	<tr>
+		<td><input type="text" name="name" required="required"/></td>
+		<td>
+			 <select name='serviceCategoryId'>
+				{% for serviceCategory in serviceCategorys %}
+				<option value='{{serviceCategory.id}}'>{{serviceCategory.name}}</option>
+				{% endfor %}				 
+			</select>
+		</td>
+		<td><textarea rows='2' cols='30' name='comment'>无</textarea></td>
+		<td><input type="submit" name="add" value="新建"/></td>
+	</tr>
+	</form>
+	{% for productCategory in productCategorys %}
+	<tr>		
+		<td>{{productCategory.1}}</td>
+		<td>{{productCategory.2}}</td>
+		<td>{{productCategory.3}}</td>
+		<td>
+			
+			<a href='edit/{{productCategory.0}}'>编辑</a>
+			<a href='del/{{productCategory.0}}'>删除</a>
+		</td>
+	</tr>
+	{% endfor %}
+</table>
+</center>
+</body>
+</html>

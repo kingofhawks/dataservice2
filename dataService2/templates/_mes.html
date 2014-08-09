@@ -1,0 +1,103 @@
+<style>
+#postit{
+position:absolute;
+width:auto;
+max-width: 275px;
+right: 0px;
+background-color:lightyellow;
+border:1px solid black;
+visibility:hidden;
+z-index:100;
+cursor:hand;
+}
+#closeIMG{
+width: 20px;
+height: 20px;
+padding-right: 2px;
+padding-top: 2px;
+}
+#mesUL{
+list-style: none;
+padding-left: 5px;
+padding-right: 25px;
+}
+.SUCCESS{
+font-size: 0.8em;
+color: green;
+}
+.INFO{
+font-size: 0.8em;
+color: blue;
+}
+.ERROR{
+font-size: 0.8em;
+color: red;
+}
+.WARNING{
+font-size: 0.8em;
+color: yellow;
+}
+</style>
+
+{% if messages %}
+<div id="postit">
+  <div align="right"><img id="closeIMG" src="/static/img/mesClose.png" onclick="javascript:closeit()" ></div>
+  <ul id="mesUL">
+    {% for message in messages %}
+    <li {% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+    {% endfor %}
+  </ul>
+</div>
+{% endif %}
+
+<script>
+var once_per_browser=0
+var ns4=document.layers
+var ie4=document.all
+var ns6=document.getElementById && !document.all
+if (ns4)
+crossobj=document.layers.postit
+else if (ie4||ns6)
+crossobj=ns6? document.getElementById("postit") : document.all.postit
+function closeit(){
+if (ie4||ns6)
+crossobj.style.visibility="hidden"
+else if (ns4)
+crossobj.visibility="hide"
+}
+
+function get_cookie4(Name) {
+var search = Name + "="
+var returnvalue = "";
+if (document.cookie4.length > 0) {
+offset = document.cookie4.indexOf(search)
+if (offset != -1) {
+offset += search.length
+end = document.cookie4.indexOf(";", offset);
+if (end == -1)
+end = document.cookie4.length;
+returnvalue=unescape(document.cookie4.substring(offset, end))
+}
+}
+return returnvalue;
+}
+
+function showornot(){
+if (get_cookie4('postdisplay')==''){
+showit()
+document.cookie4="postdisplay=yes"
+}
+}
+
+function showit(){
+if (ie4||ns6)
+crossobj.style.visibility="visible"
+else if (ns4)
+crossobj.visibility="show"
+}
+
+if (once_per_browser)
+showornot()
+else
+showit()
+</script>

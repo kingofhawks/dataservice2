@@ -1,0 +1,53 @@
+<html>
+<head>
+	<meta charset="UTF-8"/>
+	<title>优惠列表</title>
+</head>
+<body>
+<center>
+<table width="80%">
+	<tr>
+		<td>折扣</td>
+		<td>是否激活</td>
+		<td>说明</td>
+		<td></td>
+	</tr>
+	<form method='post' action='addDiscount'>
+	<tr>
+		<td><input type='number' step='any' name='discountValue' required="required"/></td>
+		<td>
+			<select name='isActive'>
+				<option value='0'>否</option>
+				<option value='1'>是</option>
+			</select>
+		</td>
+		<td><textarea name='comment' cols='30' rows='2'>无</textarea></td>
+		<td>
+			<input type='submit' name='add' value='新建'/>
+		</td>
+	</tr>
+	</form>
+	{% for discount in discounts %}
+	<tr>
+		<td>{{discount.discountValue}}</td>
+		<td>
+			{% ifequal discount.isActive "0" %}
+			否
+			{% else %}
+			是
+			{% endifequal %}
+		</td>
+		<td>
+			{{discount.comment}}
+		</td>
+		<td>
+			
+			<a href='edit/{{discount.id}}'>编辑</a>
+			<a href='del/{{discount.id}}'>注销</a>
+		</td>
+	</tr>
+	{% endfor %}
+</table>	
+</center>
+</body>
+</html>

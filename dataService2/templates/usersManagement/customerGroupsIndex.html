@@ -1,0 +1,37 @@
+<html>
+<head>
+	<meta charset="UTF-8"/>
+	<title>客户级别列表</title>
+</head>
+<body>
+<center>
+<input type="button" name="add" value="新建" onClick="javascript:window.location.href='new';return false;"/>
+<table width='70%' border='1'>
+	<tr>
+		<td>客户级别</td>
+		<td>说明</td>
+		<td>享受的优惠</td>
+		<td>享受的服务</td>
+		<td></td>
+	</tr>
+	{% for customerGroup in customerGroups %}
+	<form method='post' action='deleteCustomerGroup'>
+	<tr>
+		{% load cusGroup_transform %}
+		<td>{{customerGroup.name}}</td>
+		<td>{{customerGroup.comment}}</td>
+		<td>{% trans_discount customerGroup.discountId %}</td>
+		<td>{% trans_product customerGroup.productId %}</td>
+		<td>
+			
+			<a href='edit/{{customerGroup.id}}'>编辑</a>
+			
+			<!--<input type='submit' name='delete' value='删除'/>-->
+		</td>
+	</tr>
+	</form>
+	{%endfor%}
+</table>
+</center>
+</body>
+</html>

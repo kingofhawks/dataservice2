@@ -1,0 +1,30 @@
+<html>
+<head>
+	<meta charset="UTF-8"/>
+	<title>编辑管理员级别信息</title>
+</head>
+<body>
+<center>
+{% for adminGroup in adminGroupInfo %}
+<form action="../editAdminGroup" method="POST">
+	<table width='70%'>
+		<tr>
+			<td>管理员级别</td>
+			<td><input type='text' name='name' value='{{adminGroup.name}}' required="required"/></td>
+		</tr>
+		<tr>
+			<td>说明</td>
+			<td><textarea rows="2" cols="30" name='comment'>{{adminGroup.comment}}</textarea></td>
+		</tr>		
+		<tr>
+			<td><input type="hidden" name='id' value='{{adminGroup.id}}'/> </td>
+			<td>
+				<input type="submit" name="update " value="确定"/>
+				<input type="button" name="return" value="取消" onClick="history.back()"/>
+			</td>
+		</tr>
+		</table>
+{% endfor %}
+</center>
+</body>
+</html>

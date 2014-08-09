@@ -1,0 +1,10 @@
+<configuration>
+  <property>
+    <name>fs.default.name</name>
+    <value>192.168.0.1</value>
+  </property>
+  <property>
+    <name>hadoop.tmp.dir</name>
+    <value>/home/grid/hadoop/run/tmp_dir</value>
+  </property>
+</configuration>

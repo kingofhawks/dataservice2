@@ -1,0 +1,31 @@
+<html>
+<head>
+	<title>账单列表</title>
+</head>
+<body>
+<center>
+<form method="post" action="search">
+<table width="100%">
+	<tr>
+		<td>
+			<input type="radio" name="itemType" value="1"/>帐号：<input type="text" name="account"/>
+			</br>
+			<input type="radio" name="itemType" value="2"/>客户：<input type="text" name="customer"/>
+		</td>
+		<td>
+			<label>交易时间</label>
+			<input type="text" name="year"/>(2013)年
+			<input type="text" name="month"/>(04)月
+		</td>
+		<td>
+			<input type="submit" name="search" value="搜索"/>
+		</td>
+	</tr>
+</table>
+</form>
+
+{% include "transactionBillManagement/billList.html" %}
+
+</center>
+</body>
+</html>

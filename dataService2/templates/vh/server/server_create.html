@@ -1,0 +1,82 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+{% load staticfiles %}
+<title>创建虚拟主机</title>
+<link rel="stylesheet" type="text/css" href="{% static "css.css" %}"></link>
+<script type="text/javascript" src="{% static "js.js" %}"></script>
+</head>
+<body class="body">
+{% include '_head.html' %}
+<div class="content">
+  <div class="sub_nav">
+      {% include 'vh/_sub_nav.html' %}
+      <script language="javascript" type="text/javascript">
+      document.getElementById('sub3').style.cssText += "background:#FFFFFF;width:148px;border-bottom:#9bcff7 2px solid;";
+      </script>
+  </div>
+  <div class="contentBox">
+    {% include '_mes.html' %}
+    创建虚拟机：<br />
+    <form action="/virtualHost/server/create/submit/" class="" method="post">
+    {% csrf_token %}
+    <label>source Type</label><br />
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    <select id="sourceType" name="sourceType" onchange="changeLaunchSourceType()">
+      <option value="" selected="selected">--select--</option>
+      {% for type in sourceTypeList %}
+        <option value="{{ type.key }}">{{ type.value }}</option>  
+      {% endfor %}
+    </select><br />
+    <label id="sourceImage" style="display:none">Image name</label><br />
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    <select id="sourceImageSelect" name="sourceImageSelect" style="display:none">
+      <option value="" selected="selected">--select--</option>
+      {% for image in imageList %}
+        <option value="{{ image.id }}">{{ image.name }}</option>  
+      {% endfor %}
+    </select><br />
+    <label id="sourceSnapshot" style="display:none">Snapshot name</label><br />
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    <select id="sourceSnapshotSelect" name="sourceSnapshotSelect" style="display:none">
+      <option value="" selected="selected">--select--</option>
+      {% for snapshot in snapshotList %}
+        <option value="{{ snapshot.id }}">{{ snapshot.name }}</option>  
+      {% endfor %}
+    </select><br />
+    <label>Flavor name</label><br />
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    <select id="sourceFlavorSelect" name="sourceFlavorSelect">
+      <option value="" selected="selected">--select--</option>
+      {% for flavor in flavorList %}
+        <option value="{{ flavor.id }}">{{ flavor.name }}</option>  
+      {% endfor %}
+    </select><br />
+    <label>name</label><br />
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    <input type="text" name="serverName"></input><br />
+    <label>keypair</label><br />
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    <select id="sourceKeypairSelect" name="sourceKeypairSelect">
+      <option value="" selected="selected">--select--</option>
+      {% for keypair in keypairList %}
+        <option value="{{ keypair.id }}">{{ keypair.name }}</option>  
+      {% endfor %}
+    </select><br />
+    <label>Security Groups</label><br />
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    <select id="sourceSecurityGropSelect" name="sourceSecurityGropSelect">
+      <option value="" selected="selected">--select--</option>
+      {% for securityGroup in securityGroupList %}
+        <option value="{{ securityGroup.id }}">{{ securityGroup.name }}</option>  
+      {% endfor %}
+    </select><br />
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    <input type="submit" value="submit"></input>
+    </form>
+  </div>
+</div>
+{% include '_foot.html' %}
+</body>
+</html>

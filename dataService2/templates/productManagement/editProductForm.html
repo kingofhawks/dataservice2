@@ -1,0 +1,70 @@
+<html>
+<head>
+	<meta charset="UTF-8"/>
+	<title>编辑产品信息</title>
+</head>
+<body>
+<center>
+{% for product in products %}
+<form action="../editProduct" method="POST">
+<table widht="80%">
+	<tr>		
+		<td>产品名称</td>
+		<td><input type='text' name='name' value='{{product.name}}' required="required"></td>	
+	</tr>
+	<tr>		
+		<td>产品种类</td>
+		<td>
+			<select name="productCategory">
+			{% for productCategory in productCategorys %}
+				{% ifequal product.productCategoryId productCategory.id %}
+				<option value='{{productCategory.0}}' selected="selected">{{productCategory.1}}</option>
+				{% else %}
+				<option value='{{productCategory.0}}' >{{productCategory.1}}</option>
+				{% endifequal %}
+			{% endfor %}
+			</select>
+		</td>	
+	</tr>
+	<tr>
+		<td>是否激活</td>
+		<td>
+			{% ifequal product.isActive "0" %}
+			<input type='radio' name='isActive' value='0' checked='checked'/>否
+			<input type='radio' name='isActive' value='1'/>是
+			{% else %}
+			<input type='radio' name='isActive' value='0'/>否
+			<input type='radio' name='isActive' value='1' checked='checked'/>是
+			{% endifequal %}
+		</td>
+	</tr>
+	<tr>
+		<td>代码存放位置/endpoint</td>
+		<td><input type='text' name='path' value='{{product.path}}'></td>
+	</tr>
+	<tr>
+		<td>单价</td>
+		<td><input type='number' step="any" name='price' required="required" value='{{product.price}}'></td>
+	</tr>
+	<tr>
+		<td>单位</td>
+		<td><input type='text' name='unit' value='{{product.unit}}'></td>
+	</tr>
+	<tr>
+		<td>说明</td>
+		<td><textarea name='comment' rows='2' cols='30'>{{product.comment}}</textarea></td>
+	</tr>
+	<tr>
+		<td></td>
+		<td>
+			<input type='hidden' name='id' value='{{product.id}}'/>
+			<input type='submit' name='update' value='确定'/>
+			<input type="button" name="return" value="取消" onClick="history.back()"/>			
+		</td>
+	</tr>
+</table>
+</form>
+{% endfor %}
+</center>
+</body>
+</html>

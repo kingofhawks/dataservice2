@@ -1,0 +1,28 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+{% load staticfiles %}
+<title>数据交易</title>
+{% block css %}
+<link rel="stylesheet" type="text/css" href="{% static "css.css" %}"></link>
+<link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}django_tables2/themes/paleblue/css/screen.css"/>
+<link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}css/bootstrap.min.css"/>
+{% endblock %}
+</head>
+<body class="body">
+{% include '_head.html' %}
+<div class="content">
+	<div class="sub_nav">
+      {% include 'dt/_sub_nav.html' %}
+    </div>
+    <div class="contentBox">
+      {% block main %}{% endblock %}
+    </div>
+</div>
+{% include '_foot.html' %}
+{% block js %}
+      <script type="text/javascript" src="{% static "js.js" %}"></script>
+{% endblock %}
+</body>
+</html>

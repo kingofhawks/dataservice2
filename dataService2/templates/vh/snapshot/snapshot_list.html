@@ -1,0 +1,72 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+{% load staticfiles %}
+<title>镜像文件</title>
+<link rel="stylesheet" type="text/css" href="{% static "css.css" %}"></link>
+<script type="text/javascript" src="{% static "js.js" %}"></script>
+</head>
+<body class="body">
+{% include '_head.html' %}
+<div class="content">
+  <div class="sub_nav">
+      {% include 'vh/_sub_nav.html' %}
+      <script language="javascript" type="text/javascript">
+      document.getElementById('sub6').style.cssText += "background:#FFFFFF;width:148px;border-bottom:#9bcff7 2px solid;";
+      </script>
+  </div>
+  <div class="contentBox">
+    {% include '_mes.html' %}
+  <table>
+  <tr>
+    <td>名称</td>
+    <td>类型</td>
+    <td>格式</td>
+    <td>大小</td>
+    <td>状态</td>
+    <td>公有</td>
+    <td>操作</td>
+  </tr>
+  {% for serverSnapshot in serverSnapshotList %}
+  <tr>
+    <td>{{ serverSnapshot.name }}</td>
+    <td>{{ serverSnapshot.container_format }}</td>
+    <td>{{ serverSnapshot.disk_format }}</td>
+    <td>{{ serverSnapshot.size }}</td>
+    <td>{{ serverSnapshot.status }}</td>
+    <td>{{ serverSnapshot.visibility }}</td>
+    <td>{{ serverSnapshot.active }}</td>
+    <td>
+      <a href="/virtualHost/snapshot/server/{{ serverSnapshot.id }}/delete/" >删除</a>
+    </td>
+  </tr>
+  {% endfor %}
+  </table>
+  <table>
+  <tr>
+    <td>名称</td>
+    <td>大小</td>
+    <td>状态</td>
+    <td>附加</td>
+    <td>类型</td>
+    <td>描述</td>
+    <td>操作</td>
+  </tr>
+  {% for volumeSnapshot in volumeSnapshotList %}
+  <tr>
+    <td>{{ volumeSnapshot.displayName }}</td>
+    <td>{{ volumeSnapshot.size }}</td>
+    <td>{{ volumeSnapshot.status }}</td>
+    <td>{{ volumeSnapshot.attachments }}</td>
+    <td>{{ volumeSnapshot.volumeType }}</td>
+    <td>{{ volumeSnapshot.displayDescription }}</td>
+    <td><a href="/virtualHost/volume/{{ volumeSnapshot.id }}/deletesnapshot/" >删除</a></td>
+  </tr>
+  {% endfor %}
+  </table>
+  </div>
+</div>
+{% include '_foot.html' %}
+</body>
+</html>

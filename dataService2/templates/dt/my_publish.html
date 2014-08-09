@@ -1,0 +1,10 @@
+{% extends 'dt/base_market.html' %}
+{% load render_table from django_tables2 %}
+{% block main %}
+	{% render_table table %}
+	<form enctype="multipart/form-data" action="/market/publish/" method="get">		
+	    <button type="submit" class="btn btn-primary" id="api">
+			 发布数据
+		</button>
+	</form>    
+{% endblock %}

@@ -1,0 +1,20 @@
+{% extends 'dt/base_market.html' %}
+{% load staticfiles %}
+{% load crispy_forms_tags %}
+{% block main %}
+	<form enctype="multipart/form-data" action="." method="post" data-validate="parsley">{% csrf_token %}			
+	    	<div class="fieldWrapper">
+	    		{{ form|crispy }}<br />
+			</div>
+			<button type="submit" class="btn btn-primary">
+			  <i class="icon-white icon-upload"></i> 上传数据
+		  	</button>
+	</form>
+{% endblock %}
+
+{% block js %}
+{{ block.super }}
+<script type="text/javascript" src="{% static "js/jquery-2.0.1.min.js" %}"></script>
+<script type="text/javascript" src="{% static "js/parsley.min.js" %}"></script>
+<script type="text/javascript" src="{% static "js/parsley.messages.zh_cn.js" %}"></script>
+{% endblock %}

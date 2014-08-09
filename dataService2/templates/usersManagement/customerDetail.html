@@ -1,0 +1,65 @@
+<html>
+<head>
+	<meta charset="UTF-8"/>
+	<title>客户信息</title>
+</head>
+<body>
+<center>
+	{% for customer in customerInfo %}
+	<table width='70%'>
+		<tr>
+			<td>客户名</td>
+			<td>{{customer.name}}</td>
+		</tr>
+		<tr>
+			<td>联系人</td>
+			<td>{{customer.contactName}}</td>
+		</tr>
+		<tr>
+			<td>联系人电话</td>
+			<td>{{customer.tel}}</td>
+		</tr>
+		<tr>
+			<td>联系人邮箱</td>
+			<td>{{customer.email}}</td>
+		</tr>
+		<tr>
+			<td>联系人身份证号</td>
+			<td>{{customer.identification}}</td>
+		</tr>
+		<tr>
+			<td>联系人地址</td>
+			<td>{{customer.address}}</td>
+		</tr>
+		<tr>
+			<td>联系人邮编</td>
+			<td>{{customer.post}}</td>
+		</tr>
+		<tr>
+			<td>创建时间</td>
+			<td>{{customer.createDate}}</td>
+		</tr>
+		<tr>
+			<td>注销时间</td>
+			<td>{{customer.cancelDate}}</td>
+		</tr>
+		<tr>
+			<td>是否是企业用户</td>
+			<td>
+				{% ifequal customer.is_enterprise "0" %}
+				否
+				{% else %}
+				是
+				{% endifequal %}
+			</td>
+		</tr>
+		<tr>
+			<td>级别</td>
+			<td>{{customerGroupName}}</td>
+		</tr>
+	</table>
+	{% endfor %}
+	<input type="button" name="return" value="返回首页" onClick="javascript:window.location.href('../')"/>
+</center>
+</body>
+</html>

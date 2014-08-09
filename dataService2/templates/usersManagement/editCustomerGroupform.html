@@ -1,0 +1,58 @@
+<html>
+<head>
+	<meta charset="UTF-8"/>
+	<title>编辑客户级别信息</title>
+</head>
+<body>
+<center>
+	{% for customerGroup in customerGroupInfo %}
+	<form action="../editCustomerGroup" method="POST">
+	<table width='70%'>
+		<tr>
+			<td>客户级别</td>
+			<td><input type='text' name='name' value='{{customerGroup.name}}' required="required"/></td>
+		</tr>
+		<tr>
+			<td>享受的优惠</td>						
+			<td>
+				<select name="discount">
+				{% for discount in discounts %}
+					{% ifequal customerGroup.discountId discount.id %}
+					<option value='{{discount.id}}' selected="selected">{{discount.discountValue}}</option>
+					{% else %}
+					<option value='{{discount.id}}'>{{discount.discountValue}}</option>
+					{% endifequal %}					
+				{% endfor %}
+				</select>			
+			</td>
+		</tr>
+		<tr>
+			<td>享受的服务</td>
+			<td>
+				{% for product in products %}
+				{% if product.2 in customerGroup.productId %}
+				<input type="checkbox" name="product" value='{{product.2}}' checked='checked'/>{{product.3}}<br/>
+				{% else %}
+				<input type="checkbox" name="product" value='{{product.2}}'/>{{product.3}}<br/>
+				{% endif %}
+				{% endfor %}
+			</td>
+		</tr>
+		<tr>
+			<td>说明</td>
+			<td><textarea name='comment' rows="2" cols="30">{{customerGroup.4}}</textarea></td>
+		</tr>		
+		<tr>
+			<td><input type="hidden" name='id' value='{{customerGroup.id}}'/> </td>
+			<td>
+				<input type="submit" name="update " value="确定"/>
+				<input type="button" name="return" value="取消" onClick="history.back()"/>
+			</td>
+		</tr>
+	</table>
+	</form>
+	{% endfor %}
+	
+</center>
+</body>
+</html>

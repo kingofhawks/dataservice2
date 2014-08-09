@@ -1,0 +1,75 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+{% load staticfiles %}
+<title>juan</title>
+<link rel="stylesheet" type="text/css" href="{% static "css.css" %}"></link>
+<script type="text/javascript" src="{% static "js.js" %}"></script>
+</head>
+<body class="body">
+{% include '_head.html' %}
+<div class="content">
+  <div class="sub_nav">
+      {% include 'vh/_sub_nav.html' %}
+      <script language="javascript" type="text/javascript">
+      document.getElementById('sub4').style.cssText += "background:#FFFFFF;width:148px;border-bottom:#9bcff7 2px solid;";
+      </script>
+  </div>
+  <div class="contentBox">
+    {% include '_mes.html' %}
+    <table>
+      <tr>
+        <td>id</td>
+        <td>{{ volumeDetail.id }}</td>
+      </tr>
+      <tr>
+        <td>size</td>
+        <td>{{ volumeDetail.size }}</td>
+      </tr>
+      <tr>
+        <td>status</td>
+        <td>{{ volumeDetail.status }}</td>
+      </tr>
+      <tr>
+        <td>displayDescription</td>
+        <td>{{ volumeDetail.displayDescription }}</td>
+      </tr>
+      <tr>
+        <td>availabilityZone</td>
+        <td>{{ volumeDetail.availabilityZone }}</td>
+      </tr>
+      <tr>
+        <td>displayName</td>
+        <td>{{ volumeDetail.displayName }}</td>
+      </tr>
+      <tr>
+        <td>volumeType</td>
+        <td>{{ volumeDetail.volumeType }}</td>
+      </tr>
+      <tr>
+        <td>snapshotId</td>
+        <td>{{ volumeDetail.snapshotId }}</td>
+      </tr>
+      <tr>
+        <td>createAt</td>
+        <td>{{ volumeDetail.createAt }}</td>
+      </tr>
+      <tr>
+        <td>metadata</td>
+        <td>{{ volumeDetail.metadata }}</td>
+      </tr>
+      <tr>
+        <td>attachments</td>
+        <td>
+          {% for att in volumeDetail.attachments %}
+            {{ att.id }}
+          {% endfor %}
+        </td>
+      </tr>
+    </table>
+  </div>
+</div>
+{% include '_foot.html' %}
+</body>
+</html>

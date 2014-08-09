@@ -1,0 +1,38 @@
+{% load staticfiles %}
+<div class="head">
+  <a href="/" class="logo_href"><img  class="logo" src="{% static "img/logo_cit.png" %}"/></a>
+  <label class="label">数据服务云平台</label>
+ <div class="session">
+    {% if lName %}
+        {{ lName }}
+        <a href="/logout/">退出登录</a>
+    {% else %}
+        <a href="/login/">登录</a>
+        <a href="/regist/">注册</a>
+    {% endif %}
+  </div>
+  <div class="search">
+    <form method="get" action="/search">
+      <input type="text" id="id_q" name="q" class="search_text" placeholder="输入要搜索的关键字" 
+             autocomplete="off"/>
+      <input type="submit" id="sub" class="search_button" value="&#x641C;&#x7D22;" />
+    </form>
+  </div>
+</div>
+<div class="navigation">
+  <div class="container">
+    <ul class="nav">
+      {% if lName %}
+        <li class="b1"><a href="/my/index/">个人首页</a></li>
+      {% else %}
+        <li class="b1"><a href="/index/">首页</a></li>
+      {% endif %} 
+      <li class="b1"><a href="/virtualHost/">虚拟主机</a></li>
+      <li class="b2"><a href="/cloudStorage/">存储服务</a></li>
+      <li class="b1"><a href="/dataProcessing/">数据分析</a></li>
+      <li class="b2"><a href="/market/data">交易平台</a></li>
+      <li class="b1"><a href="/pricingStandrd/">资费标准</a></li>
+      <li class="b3"><a href="/supportCenter/">帮助中心</a></li>
+    </ul>
+  </div>
+</div>

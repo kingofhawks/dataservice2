@@ -1,0 +1,37 @@
+1.data collection
+1.1 Search Engine(Need to auto update index)
+1.2 View Data(Title/Description/Price/Creator/Date/Category/[optional]Quality/Comment/Tag...)
+1.3 Download/Save to Cloud Storage/REST API?
+1.4 Upload from Local or Cloud Storage or WebService API or database connection?
+1.5 Data Format? How to Standized?
+1.6 How to store data? Database+Object Storage(Swift?) or External Storage
+1.7 Cloud Provided Data vs Community Data
+1.8 Customer could review data
+1.9 Preview/Visualize Data
+2.trading
+2.1 Billing based on file or API request numbers?
+2.2 Discount Strategy
+2.3 Payment Gateways(网上银行支付;第三方支付平台:银联电子支付/银联在线/支付宝/Paypal/手机支付/快钱;信用卡支付)
+3.user management
+3.1 Register info need to be authenticated by cloud provider or 3rd party
+3.2 Data list
+3.3 Billing History  
+3.4 Profile(Seller info/Bank Account)
+4.REST API
+4.1 OData protocol?
+4.2 Response format: JSON/CSV/XML/PDF
+4.3 Authentication via OAuth2.0 or HTTP Basic
+5. [optional]Application Support? Based on Hadoop MapReduce,integrate with HDFS
+6. [optional] Mobile Support?
+
+Providers:
+1.Azure
+2.Factual
+3.Infochimps
+4.DataMarket
+5.Wolfram|Alpha Pro
+6.Freebase
+7.terapeak
+8.SAP HANA Marketplace
+
+http://strata.oreilly.com/2012/03/data-markets-survey.html

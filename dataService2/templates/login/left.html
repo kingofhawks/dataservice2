@@ -1,0 +1,42 @@
+<html>
+<head>
+{% load staticfiles %}
+</head>
+<body>
+<div>
+    {% if name %}
+        {{ name }}
+        <a id='logout' href="#">退出登录</a>
+    {% else %}
+        <a id='login' href="#">登录</a>        
+    {% endif %}
+</div>
+<ul>
+	<li><a href='/sysAdminManagement/sysAdmin/' target='showframe'>系统管理员管理</a></li>
+	<li><a href='/sysAdminManagement/adminGroup/' target='showframe'>系统管理员级别管理</a></li>
+	<p></p>
+	<li><a href='/usersManagement/customer/' target='showframe'>客户管理</a></li>
+	<li><a href='/usersManagement/customerGroups/' target='showframe'>客户级别管理</a></li>
+	<p></p>
+	<li><a href='/productManagement/serviceCategory/' target='showframe'>服务类型管理</a></li>
+	<li><a href='/productManagement/productCategory/' target='showframe'>产品种类管理</a></li>
+	<li><a href='/productManagement/product/' target='showframe'>产品管理</a></li>
+	<p></p>
+	<li><a href='/tariffManagement/discount/' target='showframe'>优惠管理</a></li>
+	<li><a href='/tariffManagement/package/' target='showframe'>套餐管理</a></li>
+	<p></p>
+	<li><a href='/purchaseManagement/purchase/' target='showframe'>服务订单查询</a></li>
+	<p></p>
+	<li><a href='/transactionBillManagement/bill/' target='showframe'>账单查询</a></li>
+</ul>
+ <script type="text/javascript" src="{% static "js/jquery-2.0.1.min.js" %}"></script>
+ <script type="text/javascript">
+	$('#logout').click(function (e) {
+		window.parent.location="/billing/logout/"		 
+	})
+	$('#login').click(function (e) {
+		window.parent.location="/billing/"		 
+	})
+</script>
+</body>
+</html>

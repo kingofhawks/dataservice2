@@ -1,0 +1,10 @@
+{% extends 'dt/base_market.html' %}
+{% load crispy_forms_tags %}
+{% block main %}
+	<form enctype="multipart/form-data" action="." method="post">{% csrf_token %}			
+	    	<div class="fieldWrapper">
+	    		{{ form|crispy }}<br />
+			</div>
+			<button type="submit" class="btn btn-primary btn-large">提交订单</button>
+	</form>
+{% endblock %}

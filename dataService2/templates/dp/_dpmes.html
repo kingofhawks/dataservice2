@@ -1,0 +1,15 @@
+
+  <table>
+    <tr>
+      <td>时间</td>
+      <td>消息</td>
+      <td>内容</td>
+    </tr>
+    {% for mes in mesList %}
+    <tr>
+      <td>{{ mes.time }}</td>
+      <td>{{ mes.message }}</td>
+      <td>{{ mes.metadata }}</td>
+    </tr>
+    {% endfor %}
+  </table>

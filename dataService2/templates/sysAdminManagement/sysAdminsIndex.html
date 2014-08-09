@@ -1,0 +1,57 @@
+<html>
+<head>
+	<meta charset="UTF-8"/>
+	<title>系统管理员等级列表</title>
+</head>
+<body>
+<center>
+<table>
+	<form method="post" action="addSysAdmin">
+	<tr>
+		<td>管理员名：<input type="text" name="name" required="required"/></td>
+		<td>密码：<input type="password" name="pwd" required="required"/></td>
+		<td>邮箱：<input type="email" name="email" required="required"/></td>
+		<td>
+			等级：
+			<select name="group">
+				{% for adminGroup in adminGroups %}
+				<option value='{{adminGroup.id}}'>{{adminGroup.name}}</option>
+				{% endfor %}
+			</select>
+		</td>
+		<td><input type="submit" name="add" value="注册"/></td>
+	</tr>
+	</form>
+</table>
+<table width='70%' >
+	<tr>
+		<td>名称</td>
+		<td>邮箱</td>
+		<td>管理员级别</td>		
+		<td></td>
+	</tr>
+	{% for sysAdmin in sysAdmins %}
+	<tr>
+		<td>
+			{{sysAdmin.1}}
+		</td>
+		<td>
+			{{sysAdmin.2}}
+		</td>
+		<td>
+			{{sysAdmin.3}}
+		</td>
+		<td>
+			{% ifnotequal sysAdmin.0 "superAdmin" %}
+			
+			<a href='edit/{{sysAdmin.0}}'>编辑</a>
+			<a href='del/{{sysAdmin.0}}'>删除</a>
+			{% endifnotequal %}
+		</td>
+	</tr>
+	{% endfor %}
+</table>
+</center>
+
+</body>
+</html>

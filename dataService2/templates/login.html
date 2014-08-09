@@ -1,0 +1,42 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+{% load staticfiles %}
+<title>登录</title>
+<link rel="stylesheet" type="text/css" href="{% static "css.css" %}"></link>
+<script type="text/javascript" src="{% static "js.js" %}"></script>
+</head>
+<body class="body">
+{% include '_head.html' %}
+<div class="login">
+  <div class="show"></div>
+  {% if lName %}
+  <div>{{ lName }},您已经登录成功，点击进入<a href="/my/">个人首页</a></div>
+  {% else %}
+  <form action="/login_submit/" class="login_form" name="loginForm" method="post" onSubmit="return checkLogin('form');">
+    {% csrf_token %}
+    <div class="message">
+    {% if messages %}
+    <ul>
+      {% for m in messages %}
+      <li {% if m.tags %} class="{{ m.tags }}" {% endif %}>{{ m }}</li>
+      {% endfor %}
+    </ul>
+    {% endif %}
+    </div>
+    <div><label>登录名:</label>
+         <input type="text" id="loginName" name="loginName" class="input" onchange="checkLogin('loginName')"></input>
+         <span id="e1" class="message2"></span></div>
+    <div><label>密码:</label>
+         <input type="password" id="pass" name="pass" class="input" onchange="checkLogin('pass')"></input>
+         <span id="e2" class="message2"></span></div>
+    <!--<div><input type="radio" name="loginType" value="user" checked="checked">使用账号</input>
+         <input type="radio" name="loginType" value="admin">管理账号</input></div>-->
+    <div><input type="submit" value="登录" class="submit"/></div>
+  </form>
+  {% endif %}
+</div>
+{% include '_foot.html' %}
+</body>
+</html>

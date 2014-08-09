@@ -1,0 +1,44 @@
+<html>
+<head>
+	<meta charset="UTF-8"/>
+	<title>交易列表</title>
+</head>
+<body>
+<center>
+<form method="post" action="search">
+<table>
+	<tr>
+		<td>
+			<select name="productType">
+				<option value="0">全部</option>
+				<option value="1">服务</option>
+				<option value="2">套餐</option>
+			</select>
+		</td>		
+		<td>
+			<label>客户名</label>
+			<input type="text" name="customer"/>
+		</td>
+		<td>
+			<label>服务</label>
+			<input type="text" name="service"/>
+		</td>
+		<td>
+			<label>交易时间</label>
+			<input type="text" name="year"/>(2013)年
+			<input type="text" name="month"/>(04)月
+		</td>
+		<td>
+			<input type="submit" name="search" value="搜索"/>
+		</td>
+	</tr>
+</table>
+</form>
+
+{% include "purchaseManagement/productList.html" %}
+
+{% include "purchaseManagement/packageList.html" %}
+
+</center>
+</body>
+</html>

@@ -1,0 +1,9 @@
+django_tables2
+django-crispy-forms>=1.2.8
+pyelasticsearch>=0.5
+django-haystack>=2.0.0
+python-keystoneclient
+python-swiftclient
+django-celery
+redis
+django-tastypie

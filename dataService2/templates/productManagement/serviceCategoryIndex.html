@@ -1,0 +1,35 @@
+<html>
+<head>
+	<meta charset="UTF-8"/>
+	<title>服务类型列表</title>
+</head>
+<body>
+<center>
+<table width="80%">
+	<tr>
+		<td>服务类型</td>
+		<td>说明</td>
+		<td></td>
+	</tr>
+	<form method='post' action='addServiceCategory'>
+	<tr>
+		<td><input type="text" name="name" required="required"/></td>
+		<td><textarea rows='2' cols='30' name='comment'>无</textarea></td>
+		<td><input type="submit" name="add" value="新建"/></td>
+	</tr>
+	</form>
+	{%for serviceCategory in serviceCategorys %}
+	<tr>
+		<td>{{serviceCategory.name}}</td>
+		<td>{{serviceCategory.comment}}</td>
+		<td>
+			
+			<a href='edit/{{serviceCategory.id}}'>编辑</a>
+			<a href='del/{{serviceCategory.id}}'>删除</a>			
+		</td>
+	</tr>	
+	{% endfor %}
+</table>
+</center>
+</body>
+</html>

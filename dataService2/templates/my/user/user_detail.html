@@ -1,0 +1,59 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+{% load staticfiles %}
+<title>详细信息</title>
+<link rel="stylesheet" type="text/css" href="{% static "css.css" %}"></link>
+<script type="text/javascript" src="{% static "js.js" %}"></script>
+</head>
+<body class="body">
+{% include '_head.html' %}
+  <div class="content">
+    <div class="sub_nav">
+      {% include 'my/_sub_nav.html' %}
+      <script language="javascript" type="text/javascript">
+      document.getElementById('sub1').style.cssText += "background:#FFFFFF;width:147px;border-bottom:#9bcff7 2px solid;";
+      </script>
+    </div>
+    <div class="contentBox">
+      {% include '_mes.html' %}
+      <table border="1px">
+        <tr>
+          <td>用户名称</td><td>{{ user.loginName }}</td>
+          <td>创建日期</td><td>{{ user.create_at }}</td>
+        </tr>
+        <tr>
+          <td>帐号类型</td><td>{{ user.type }}</td>
+          <td>主帐号</td><td>{{ user.master }}</td>
+        </tr>
+        <tr>
+          <td>用户id</td><td>{{ user.id }}</td>
+          <td>用户id</td><td>{{ user.osid }}</td>
+        </tr>
+      </table>
+      {% if user.tenants %}
+      <table border="1">
+        <tr>
+          <td>所属项目</td>
+          <td>所任角色</td>
+          <td>加入时间</td>
+          <td>说明</td>
+        </tr>
+        {% for tenant in user.tenants %}
+        <tr>
+          <td>{{ tenant.tenant }}</td>
+          <td>{{ tenant.role }}</td>
+          <td>{{ tenant.create_at }}</td>
+          <td>{{ tenant.desc }}</td>
+        </tr>
+        {% endfor %}
+      </table>
+      {% else %}
+        该用户当前未加入任何项目。
+      {% endif %}
+    </div>
+  </div>
+{% include '_foot.html' %}
+</body>
+</html>

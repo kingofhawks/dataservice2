@@ -1,0 +1,21 @@
+<html>
+<head>
+	<meta charset="UTF-8"/>
+	<title>搜索结果</title>
+</head>
+<body>
+<center>
+
+<!-- 如果选择的是“全部”或者“服务”（prodcutType=0 or 1） -->
+{% ifnotequal productType "2" %}
+{% include "purchaseManagement/productList.html" %}
+{% endifnotequal %}
+
+<!-- 如果选择的是“全部”或者“套餐”（prodcutType=0 or 2） -->
+{% ifnotequal productType "1" %}
+{% include "purchaseManagement/packageList.html" %}
+{% endifnotequal %}
+
+</center>
+</body>
+</html>

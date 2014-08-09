@@ -1,0 +1,42 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+{% load staticfiles %}
+<title>注册账户</title>
+<link rel="stylesheet" type="text/css" href="{% static "css.css" %}"></link>
+<script type="text/javascript" src="{% static "js.js" %}"></script>
+</head>
+<body class="body">
+{% include '_head.html' %}
+<div class="regist">
+    {% include '_mes.html' %}
+    <!--<div>
+    {% if messages %}
+    <ul>
+      {% for m in messages %}
+      <li {% if m.tags %} class="{{ m.tags }}"{% endif %}>{{ m.tags }}:{{ m }}</li>
+      {% endfor %}
+    {% endif %}
+    </ul>
+    </div>-->
+  <form action="/regist_submit/" class="regist_form" method="post" onSubmit="return checkRegist('form');">
+    {% csrf_token %}
+    <div><lable>登录名称:</lable>
+         <input type="text" id="loginName" name="loginName" class="input" onchange="checkRegist('loginName')"></input>
+         <span id="e1"></span></div>
+    <div><lable>登录密码:</lable>
+         <input type="password" id="password1" name="password1" class="input" onchange="checkRegist('password1')"></input>
+         <span id="e2"></span></div>
+    <div><lable>确认密码:</lable>
+         <input type="password" id="password2" name="password2" class="input" onchange="checkRegist('password2')"></input>
+         <span id="e3"></span></div>
+    <div><lable>电子邮箱:</lable>
+         <input type="text" id="email" name="email" class="input" onchange="checkRegist('email')"></input>
+         <span id="e4"></span></div>
+    <div><input type="submit" value="注册"/></div>
+  </form>
+</div>
+{% include '_foot.html' %}
+</body>
+</html>

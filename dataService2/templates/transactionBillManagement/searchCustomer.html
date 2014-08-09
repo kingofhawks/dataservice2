@@ -1,0 +1,27 @@
+<html>
+<head>
+	<meta charset="UTF-8"/>
+	<title>搜索结果</title>
+</head>
+<body>
+
+<table>
+	<tr>
+		<td>客户：</td>
+		<td>{{customer}}</td>
+	</tr>
+	{% for account in accounts %}
+	<tr>
+		<td>帐号：</td>
+		<td><a href="search/{{account.0}}" target="_blank">{{account.0}}</a></td>
+		<td>充值总额：{{account.1}}</td>
+		<td>支出总额：{{account.2}}</td>
+	</tr>
+	{% endfor %}
+</table>
+<center>
+{% include "transactionBillManagement/billList.html" %}
+
+</center>
+</body>
+</html>

@@ -1,0 +1,55 @@
+<html>
+<head>
+	<meta charset="UTF-8"/>
+	<title>产品列表</title>
+</head>
+<body>
+<center>
+<form method='post' action='addProduct'>
+<table width="70%">
+	<tr>
+		<td>产品名称</td>
+		<td><input type='text' name='name' required="required"/></td>
+	</tr>
+	<tr>
+		<td>产品种类</td>
+		<td>
+			<select name='productCategory'>
+			{% for productCategory in productCategorys %}
+				<option value='{{productCategory.0}}'>{{productCategory.1}}</option>
+			{% endfor %}
+			</select>
+		</td>		
+	</tr>
+	<tr>
+		<td>是否激活</td>
+		<td>
+			<input type='radio' value='0' name='isActive'/>否
+			<input type='radio' value='1' name='isActive' checked/>是
+		</td>
+	</tr>
+	<tr>
+		<td>代码存放位置/endpoint</td>
+		<td><input type='text' name='path' value='无'/></td>
+	</tr>
+	<tr>
+		<td>单价</td>
+		<td><input type='number' step="any" name='price' required="required"/></td>
+	</tr>
+	<tr>
+		<td>单位</td>
+		<td><input type='text' name='unit'/></td>
+	</tr>
+	<tr>
+		<td>说明</td>
+		<td><textarea rows='2' cols='30' name='comment'>无</textarea></td>
+	</tr>
+	<tr>
+		<td></td>
+		<td><input type="submit" name="add" value="添加"/></td>
+	</tr>
+</table>
+</form>
+</center>
+</body>
+</html>

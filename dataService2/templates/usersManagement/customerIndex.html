@@ -1,0 +1,45 @@
+<html>
+<head>
+	<meta charset="UTF-8"/>
+	<title>客户列表</title>
+</head>
+<body>
+<input type="button" name="MessagesList" value="我的收件箱" onClick="javascript:window.location.href('/my/messages/')"/>
+<hr/>
+<center>
+<!-- <input type="button" name="add" value="新建客户" onClick="javascript:window.location.href('edit')"/> -->
+<table >
+	<tr>
+		<td>客户名</td>
+		<td>联系人</td>
+		
+		<td>联系人电话</td>
+		<td>联系人邮箱</td>
+		
+		<td>是否注销</td>
+		<td></td>
+	</tr>
+	{% for customer in customers %}
+	<tr>
+		<td>{{customer.name}}</td>
+		<td>{{customer.contactName}}</td>
+		<td>{{customer.tel}}</td>
+		<td>{{customer.email}}</td>
+		<td>
+			{% if customer.cancelDate %}
+			已注销
+			{% endif %}
+		</td>
+		<td>
+			
+			<a href='detail/{{customer.id}}'>详细情况</a>	
+			<a href='edit/{{customer.id}}'>编辑</a>	
+			<a href='del/{{customer.id}}'>注销</a>	
+			<a href='accountList/{{customer.id}}'>客户账号</a>			
+		</td>
+	</tr>
+	{% endfor %}
+</table>
+</center>
+</body>
+</html>

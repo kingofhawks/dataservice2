@@ -1,0 +1,442 @@
+    <div class="message">
+    {% if message %}
+        <ul>
+            {% for m in message %}
+            <li>{{ m }}</li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+    </div>
+
+
+e26979534d7f4a0e932da0a42e800bf2
+e26979534d7f4a0e932da0a42e800bf2
+keystone --os_username=admin --os_password=123456 --os_auth_url=http://192.168.0.96:35357/v2.0 token-getNo handlers could be found for logger "keystoneclient.v2_0.client"
+
+root@zx-pc:/# keystone --os_username=meiyoutenant --os_password=meiyoutenant --os_tenant_name=meiyouuser --os_auth_url=http://192.168.0.96:35357/v2.0 token-get
++-----------+----------------------------------+
+|  Property |              Value               |
++-----------+----------------------------------+
+| expires   | 2013-04-28T03:01:49Z             |
+| id        | 038f02fac5394675b707a712d3d8e4d9 |
+| tenant_id | 9c109e3ba5ab4530853532329465feed |
+| user_id   | bb1e4f8a067045fe9f0964b096ad3059 |
++-----------+----------------------------------+
+
+root@zx-pc:~# keystone --os_username=meiyoutenant2 --os_password=meiyoutenant2 --os_tenant_name=meiyouuser --os_auth_url=http://192.168.0.96:35357/v2.0 token-get
++-----------+----------------------------------+
+|  Property |              Value               |
++-----------+----------------------------------+
+| expires   | 2013-04-28T03:04:57Z             |
+| id        | 4c485fac23894e83aa52531b05e3aff9 |
+| tenant_id | 9c109e3ba5ab4530853532329465feed |
+| user_id   | eb9b119e2f204ecfa77925a9f0c1ad10 |
++-----------+----------------------------------+
+
+
+
+root@zx-pc:/# keystone --token admin --endpoint http://192.168.0.96:35357/v2.0 tenant-list
++----------------------------------+-------------+---------+
+|                id                |     name    | enabled |
++----------------------------------+-------------+---------+
+| 02023e0271504682b05598585ad3ac1c | adminTenant | True    |
+| 7b603964afa741baa478eeadccf08404 | test1       | True    |
+| 97bc69792cfd4c799691348aca226a01 | test2       | True    |
+| 9c109e3ba5ab4530853532329465feed | meiyouuser  | True    |
+| a605340cf67449a19766a5850cb06d5a | service     | True    |
++----------------------------------+-------------+---------+
+
++----------------------------------+----------------------+
+|                id                |         name         |
++----------------------------------+----------------------+
+| 44aaf30dbc6a4c929acff321f7e054c6 | admin                |
+| 5a9e059503cd415193683971b61eaa26 | KeystoneAdmin        |
+| 9091ac3eb5b348c881deffe97126f3ef | ResellerAdmin        |
+| 91101c304619431f8eeb7cbea875bdfb | Member               |
+| 923bf83fc31d40eca8a235aa8fc1e49f | anotherrole          |
+| b6b585cfb55044358863ee8199854de4 | KeystoneServiceAdmin |
++----------------------------------+----------------------+
+
++----------------------------------+---------+----------------------+--------------+
+|                id                | enabled |        email         |     name     |
++----------------------------------+---------+----------------------+--------------+
+| 314bb57fe4574f3eaa0bbd7c794b8850 | True    | swift@chenshake.com  | swift        |
+| 73a09f652a34444cb9155d5d5a1e596b | True    | test@user.com        | testUser     |
+| 804a98bbafb44638a2268ea3d0a6175a | True    | 379401602@qq.com     | abc2         |
+| 9bd22a7e94f44b48bbba237f0b46e59f | True    | glance@chenshake.com | glance       |
+| a1f6820c182e4ae6b5d5d0bb02c67319 | True    | 379401602@qq.com     | abc1         |
+| b4b9b88ab9614cfa8bf36036a1a2f755 | True    | nova@chenshake.com   | nova         |
+| b7dc4c9e5b6d4abbba7498ab117b09cf | True    | admin@chenshake.com  | admin        |
+| bb1e4f8a067045fe9f0964b096ad3059 | True    | None                 | meiyoutenant |
+  eb9b119e2f204ecfa77925a9f0c1ad10
++----------------------------------+---------+----------------------+--------------+
+
+e11184d41b38432995f59a7342ebb1a7
+df30b1b1a8ef4efcaead2b8b365f0919
+f5fba3dfbf98441595afbbc63548cefd
+276a96947e5848488f9c9509616da879
+303f33c39baf4d72a9429117298eb111
+
+
+curl -X 'GET' -v -H "X-Auth-Token:admin" http://192.168.0.96:35357/v2.0/tenants | python -mjson.tool
+curl             -H "X-Auth-Token:admin" http://192.168.0.96:35357/v2.0/tenants | python -mjson.tool
+{
+  'tenants': [
+    {'id': '02023e0271504682b05598585ad3ac1c', 'enabled': True, 'description': None, 'name': 'adminTenant'}, 
+    {'id': '6509e221acde4b6986f21c23a5ad6bb9', 'enabled': True, 'description': 'Tenant create by data service plateform', 'name': 'testTenant'}, 
+    {'id': '7644d5ec96214f229bdc2c947b0aa0f4', 'enabled': True, 'description': 'Tenant create by data service plateform2', 'name': 'testTenant2'}, 
+    {'id': '7b603964afa741baa478eeadccf08404', 'enabled': True, 'description': 'test', 'name': 'test1'}, 
+    {'id': '97bc69792cfd4c799691348aca226a01', 'enabled': True, 'description': 'test', 'name': 'test2'}, 
+    {'id': '9c109e3ba5ab4530853532329465feed', 'enabled': True, 'description': None, 'name': 'meiyouuser'}, 
+    {'id': 'a605340cf67449a19766a5850cb06d5a', 'enabled': True, 'description': None, 'name': 'service'}
+  ], 
+  'tenants_links': []
+}
+
+
+curl -X 'POST' http://192.168.0.50:35357/v2.0/tokens -d '{"auth":{"passwordCredentials":{"username": "dscpTest", "password":"dscpTest"},"tenantId":"620218c946ac4c81b73d4025ec1eebb7"}}' -H 'Content-Type: application/json' | python -mjson.tool
+curl -X 'POST' http://192.168.0.96:35357/v2.0/tokens -d '{"auth":{"passwordCredentials":{"username": "dscpTest", "password":"dscpTest"},"tenantName":"adminTenant"}}' -H 'Content-Type: application/json' | python -mjson.tool
+{
+    "access": {
+        "serviceCatalog": [
+            {
+                "endpoints": [
+                    {
+                        "adminURL": "http://192.168.0.96:8774/v2/02023e0271504682b05598585ad3ac1c", 
+                        "internalURL": "http://192.168.0.96:8774/v2/02023e0271504682b05598585ad3ac1c", 
+                        "publicURL": "http://192.168.0.96:8774/v2/02023e0271504682b05598585ad3ac1c", 
+                        "region": "RegionOne"
+                    }
+                ], 
+                "endpoints_links": [], 
+                "name": "nova", 
+                "type": "compute"
+            }, 
+            {
+                "endpoints": [
+                    {
+                        "adminURL": "http://192.168.0.96:9292/v1", 
+                        "internalURL": "http://192.168.0.96:9292/v1", 
+                        "publicURL": "http://192.168.0.96:9292/v1", 
+                        "region": "RegionOne"
+                    }
+                ], 
+                "endpoints_links": [], 
+                "name": "glance", 
+                "type": "image"
+            }, 
+            {
+                "endpoints": [
+                    {
+                        "adminURL": "http://192.168.0.96:8776/v1/02023e0271504682b05598585ad3ac1c", 
+                        "internalURL": "http://192.168.0.96:8776/v1/02023e0271504682b05598585ad3ac1c", 
+                        "publicURL": "http://192.168.0.96:8776/v1/02023e0271504682b05598585ad3ac1c", 
+                        "region": "RegionOne"
+                    }
+                ], 
+                "endpoints_links": [], 
+                "name": "volume", 
+                "type": "volume"
+            }, 
+            {
+                "endpoints": [
+                    {
+                        "adminURL": "http://192.168.0.96:8773/services/Admin", 
+                        "internalURL": "http://192.168.0.96:8773/services/Cloud", 
+                        "publicURL": "http://192.168.0.96:8773/services/Cloud", 
+                        "region": "RegionOne"
+                    }
+                ], 
+                "endpoints_links": [], 
+                "name": "ec2", 
+                "type": "ec2"
+            }, 
+            {
+                "endpoints": [
+                    {
+                        "adminURL": "http://192.168.0.96:8080/v1", 
+                        "internalURL": "http://192.168.0.96:8080/v1/AUTH_02023e0271504682b05598585ad3ac1c", 
+                        "publicURL": "http://192.168.0.96:8080/v1/AUTH_02023e0271504682b05598585ad3ac1c", 
+                        "region": "RegionOne"
+                    }
+                ], 
+                "endpoints_links": [], 
+                "name": "swift", 
+                "type": "object-store"
+            }, 
+            {
+                "endpoints": [
+                    {
+                        "adminURL": "http://192.168.0.96:35357/v2.0", 
+                        "internalURL": "http://192.168.0.96:5000/v2.0", 
+                        "publicURL": "http://192.168.0.96:5000/v2.0", 
+                        "region": "RegionOne"
+                    }
+                ], 
+                "endpoints_links": [], 
+                "name": "keystone", 
+                "type": "identity"
+            }
+        ], 
+        "token": {
+            "expires": "2013-05-10T11:34:02Z", 
+            "id": "5c3ced6c26bc4a9f9583952cb7f609c5", 
+            "tenant": {
+                "description": null, 
+                "enabled": true, 
+                "id": "02023e0271504682b05598585ad3ac1c", 
+                "name": "adminTenant"
+            }
+        }, 
+        "user": {
+            "id": "b7dc4c9e5b6d4abbba7498ab117b09cf", 
+            "name": "admin", 
+            "roles": [
+                {
+                    "id": "5a9e059503cd415193683971b61eaa26", 
+                    "name": "KeystoneAdmin"
+                }, 
+                {
+                    "id": "44aaf30dbc6a4c929acff321f7e054c6", 
+                    "name": "admin"
+                }, 
+                {
+                    "id": "b6b585cfb55044358863ee8199854de4", 
+                    "name": "KeystoneServiceAdmin"
+                }
+            ], 
+            "roles_links": [], 
+            "username": "admin"
+        }
+    }
+}
+
+
+2013-05-21 17:13:06
+curl -k -X 'POST' -v http://192.168.0.50:5000/v2.0/tokens -d '{"auth":{"passwordCredentials":{"username": "dscpTest", "password":"dscpTest"}}}' -H 'Content-type: application/json' | python -mjson.tool
+curl -X POST -d '{"auth": {"tenantId": "620218c946ac4c81b73d4025ec1eebb7", "passwordCredentials":{"username": "dscpTest", "password": "dscpTest"}}}' -H "Content-type: application/json" http://192.168.0.50:35357/v2.0/tokens | python -mjson.tool
+        "token": {
+            "expires": "2013-05-22T09:15:12Z", 
+            "id": "ea7eaf02b4fc4e069d9bebd39df6ad0b", 
+            "tenant": {
+                "description": "for test.", 
+                "enabled": true, 
+                "id": "620218c946ac4c81b73d4025ec1eebb7", 
+                "name": "tenantTest"
+            }
+        }, 
+
+curl -X GET -H "X-Auth-Token:ea7eaf02b4fc4e069d9bebd39df6ad0b" -H "Content-type: application/json" http://192.168.0.50:8774/v2/620218c946ac4c81b73d4025ec1eebb7/servers | python -mjson.tool
+
+
+identity_service = "192.168.0.50:35357" /v2.0/
+image_service    = "192.168.0.50:9292"  /v1/
+volume_service   = "192.168.0.51:8776"  /v1/
+compute_service  = "192.168.0.51:8774"  /v2/
+object_store_service = "192.168.0.55:8888" v1/
+
+
+90348db1c74d4948819afc79797daef3
+
+curl -X GET http://192.168.0.50:9292/v1/images -H "X-Auth-Token:90348db1c74d4948819afc79797daef3" -H "Content-type: application/json" | python -mjson.tool
+curl -X GET http://192.168.0.51:8774/v2/86e5ae17b73749b3957886c5ad512ba0/images -H "X-Auth-Token:90348db1c74d4948819afc79797daef3" -H "Content-type: application/json" | python -mjson.tool
+curl -X GET http://192.168.0.51:8774/v2/86e5ae17b73749b3957886c5ad512ba0/servers -H "X-Auth-Token:90348db1c74d4948819afc79797daef3" -H "Content-type: application/json" | python -mjson.tool
+
+curl -X GET http://192.168.0.51:8774/v1.1/86e5ae17b73749b3957886c5ad512ba0/os-snapshots -H "X-Auth-Token:90348db1c74d4948819afc79797daef3" -H "Content-type: application/json" | python -mjson.tool
+curl -X GET http://192.168.0.51:8774/v1/86e5ae17b73749b3957886c5ad512ba0/os-volumes -H "X-Auth-Token:90348db1c74d4948819afc79797daef3" -H "Content-type: application/json" | python -mjson.tool
+
+
+identity Service v2.0
+curl -X POST \
+    http://192.168.0.50:5000/v2.0/tokens \
+    -d '{"auth": {"tenantId": "86e5ae17b73749b3957886c5ad512ba0", 
+                  "passwordCredentials":{"username": "dscp1", "password": "123456"}}}' \
+    -H "Content-type: application/json" | python -mjson.tool
+
+compute api v2
+curl -X GET \
+    http://192.168.0.51:8774/v2/86e5ae17b73749b3957886c5ad512ba0/os-snapshots \
+    -H "X-Auth-Token: 5d7747b6a034486193cd3ba0621b7a49"  \
+    -H "Content-type: application/json" | python -mjson.tool
+
+curl -X GET \
+    http://192.168.0.51:8774/v2/86e5ae17b73749b3957886c5ad512ba0/flavors \
+    -H "X-Auth-Token: 5d7747b6a034486193cd3ba0621b7a49"  \
+    -H "Content-type: application/json" | python -mjson.tool
+
+curl -X GET \
+    http://192.168.0.51:8774/v2/86e5ae17b73749b3957886c5ad512ba0/flavors/detail \
+    -H "X-Auth-Token: 5d7747b6a034486193cd3ba0621b7a49"  \
+    -H "Content-type: application/json" | python -mjson.tool
+
+curl -X GET \
+    http://192.168.0.51:8774/v2/86e5ae17b73749b3957886c5ad512ba0/os-floating-ips \
+    -H "X-Auth-Token: 5d7747b6a034486193cd3ba0621b7a49"  \
+    -H "Content-type: application/json" | python -mjson.tool
+
+curl -X GET \
+    http://192.168.0.51:8774/v2/86e5ae17b73749b3957886c5ad512ba0/os-security-groups \
+    -H "X-Auth-Token: a6f4fb3fe6d644a5979ef0f0868c10e8"  \
+    -H "Content-type: application/json" | python -mjson.tool
+
+curl -X GET \
+    http://192.168.0.51:8774/v2/86e5ae17b73749b3957886c5ad512ba0/os-simple-tenant-usage/86e5ae17b73749b3957886c5ad512ba0 \
+    -H "X-Auth-Token: a6f4fb3fe6d644a5979ef0f0868c10e8"  \
+    -H "Content-type: application/json" | python -mjson.tool
+
+curl -X GET \
+    http://192.168.0.51:8774/v2/86e5ae17b73749b3957886c5ad512ba0/servers \
+    -H "X-Auth-Token: a6f4fb3fe6d644a5979ef0f0868c10e8"  \
+    -H "Content-type: application/json" | python -mjson.tool
+
+curl -X GET \
+    http://192.168.0.51:8774/v2/86e5ae17b73749b3957886c5ad512ba0/servers/detail \
+    -H "X-Auth-Token: a6f4fb3fe6d644a5979ef0f0868c10e8"  \
+    -H "Content-type: application/json" | python -mjson.tool
+
+curl -X GET \
+    http://192.168.0.51:8774/v2/86e5ae17b73749b3957886c5ad512ba0/servers/d6dad2dc-7e3c-4c16-a4a3-ab0b874efbfa \
+    -H "X-Auth-Token: f13ffb2416bf4378962e4504a8a8eb3c"  \
+    -H "Content-type: application/json" | python -mjson.tool
+
+curl -X GET \
+    http://192.168.0.51:8774/v2/86e5ae17b73749b3957886c5ad512ba0/os-keypairs \
+    -H "X-Auth-Token: a6f4fb3fe6d644a5979ef0f0868c10e8"  \
+    -H "Content-type: application/json" | python -mjson.tool
+
+curl -X GET \
+    http://192.168.0.51:8774/v2/86e5ae17b73749b3957886c5ad512ba0/os-floating-ip-pools \
+    -H "X-Auth-Token: 7f164c3deb334f74ad2f207ceb0d0475" \
+    -H "Content-type: application/json" | python -mjson.tool
+
+curl -X POST \
+    http://192.168.0.51:8774/v2/86e5ae17b73749b3957886c5ad512ba0/os-floating-ips \
+    -H "X-Auth-Token: 7f164c3deb334f74ad2f207ceb0d0475" \
+    -H "pool: nova" \
+    -H "Content-type: application/json" | python -mjson.tool
+
+curl -X DELETE \
+    http://192.168.0.51:8774/v2/86e5ae17b73749b3957886c5ad512ba0/os-floating-ips/2 \
+    -H "X-Auth-Token: 7f164c3deb334f74ad2f207ceb0d0475" \
+    -H "Content-type: application/json" | python -mjson.tool
+
+curl -X POST \
+    http://192.168.0.51:8774/v2/86e5ae17b73749b3957886c5ad512ba0/servers/f4e5171c-248f-4f63-8470-2f9e13ce2976/action \
+    -d '{"removeFloatingIp": {"address": "10.10.10.1"}}'
+    -H "X-Auth-Token: 7f164c3deb334f74ad2f207ceb0d0475" \
+    -H "Content-type: application/json" | python -mjson.tool
+
+curl -X GET \
+    http://192.168.0.51:8774/v2/86e5ae17b73749b3957886c5ad512ba0/os-snapshots/detail \
+    -H "X-Auth-Token: 9ba1b57fd7704073be061817b46bf85c" \
+    -H "Content-type: application/json" | python -mjson.tool
+
+curl -X GET \
+    http://192.168.0.51:8774/v2/86e5ae17b73749b3957886c5ad512ba0/os-volumes/cfa456e7-066f-48fb-9508-aa6074a4af55 \
+    -H "X-Auth-Token: 4e6797b52c9949f5a49fb64c5198e735" \
+    -H "Content-type: application/json" | python -mjson.tool
+
+curl -X GET \
+    http://192.168.0.51:8774/v2/86e5ae17b73749b3957886c5ad512ba0/os-volumes \
+    -H "X-Auth-Token: 9ba1b57fd7704073be061817b46bf85c" \
+    -H "Content-Type: application/json" | python -mjson.tool
+
+curl -X DELETE \
+    http://192.168.0.51:8774/v2/86e5ae17b73749b3957886c5ad512ba0/os-volumes/cfa456e7-066f-48fb-9508-aa6074a4af55 \
+    -H "X-Auth-Token: 4e6797b52c9949f5a49fb64c5198e735" \
+    -H "Content-type: application/json" | python -mjson.tool
+
+curl -X GET \
+    http://192.168.0.51:8774/v2/86e5ae17b73749b3957886c5ad512ba0/os-snapshots \
+    -H "X-Auth-Token: 9ba1b57fd7704073be061817b46bf85c" \
+    -H "Content-Type: application/json" | python -mjson.tool
+
+curl -X POST \
+    http://192.168.0.51:8774/v2/86e5ae17b73749b3957886c5ad512ba0/servers/b49d3031-bae1-4819-967d-cd7402ea3d58/action	 \
+    -d '{"createImage" : {"name" : "new-image","metadata": {"ImageType": "Gold","ImageVersion": "2.0"}}}' \
+    -H "X-Auth-Token: 4e6797b52c9949f5a49fb64c5198e735"  \
+    -H "Content-type: application/json" | python -mjson.tool
+
+
+
+
+
+
+compute api v2 extensions
+
+image service api v2.0
+curl -X GET \
+    http://192.168.0.50:9292/v2/images \
+    -H "X-Auth-Token: 4e6797b52c9949f5a49fb64c5198e735"  \
+    -H "Content-type: application/json" | python -mjson.tool
+s: 1d727a4f-0b0f-4ab3-a1c0-02f2f0cb2314
+i: 15338178-650e-4602-aade-55089d5aecab
+
+curl -X GET \
+    http://192.168.0.50:9292/v2/images/1d727a4f-0b0f-4ab3-a1c0-02f2f0cb2314 \
+    -H "X-Auth-Token: 4e6797b52c9949f5a49fb64c5198e735"  \
+    -H "Content-type: application/json" | python -mjson.tool
+
+curl -X POST \
+    http://192.168.0.50:9292/v2/images \
+    -d '{"name":"testServerSnapshot","id":"b49d3031-bae1-4819-967d-cd7402ea3d58"}' \
+    -H "X-Auth-Token: 4e6797b52c9949f5a49fb64c5198e735"  \
+    -H "Content-type: application/json" | python -mjson.tool
+
+
+
+image service api v1
+
+object storage api v1
+curl -X GET \
+    http://192.168.0.55:8888/v1/AUTH_86e5ae17b73749b3957886c5ad512ba0/container1?format=json \
+    -H "X-Auth-Token:cd8028e3568c4e229e3ffe2a41445e26"  | python -mjson.tool
+
+curl -X HEAD -I \
+    -H "X-Auth-Token: ab6785a51a3143458779eb32bd474cbd" \
+    http://192.168.0.55:8888/v1/AUTH_86e5ae17b73749b3957886c5ad512ba0
+
+curl -X HEAD -i \
+    -H "X-Auth-Token: ab6785a51a3143458779eb32bd474cbd" \
+    http://192.168.0.55:8888/v1/AUTH_86e5ae17b73749b3957886c5ad512ba0
+
+curl -X GET -i \
+    -H "X-Auth-Token: ab6785a51a3143458779eb32bd474cbd" \
+    http://192.168.0.55:8888/v1/AUTH_86e5ae17b73749b3957886c5ad512ba0
+
+curl -X PUT \
+    -H "X-Auth-Token: ab6785a51a3143458779eb32bd474cbd" \
+    -H "X-Container-Meta-InspectedBy: null" \
+    http://192.168.0.55:8888/v1/AUTH_86e5ae17b73749b3957886c5ad512ba0/mycon
+
+curl -X DELETE \
+    -H "X-Auth-Token: ab6785a51a3143458779eb32bd474cbd" \
+    http://192.168.0.55:8888/v1/AUTH_86e5ae17b73749b3957886c5ad512ba0/test/folder1
+
+curl -X PUT \
+    -H "X-Auth-Token: f460a61d6e49434689c27cece3ef257d" \
+    -H "content-type: application/directory" \
+    -H "content-length: 0" \
+    http://192.168.0.55:8888/v1/AUTH_86e5ae17b73749b3957886c5ad512ba0/test/abcd
+
+curl -X DELETE \
+    -H "X-Auth-Token: ab6785a51a3143458779eb32bd474cbd" \
+    http://192.168.0.55:8888/v1/AUTH_86e5ae17b73749b3957886c5ad512ba0/test/sub3/sgas
+
+curl -X GET \
+    -H "X-Auth-Token: f460a61d6e49434689c27cece3ef257d" \
+    http://192.168.0.55:8888/v1/AUTH_86e5ae17b73749b3957886c5ad512ba0/container2/test/1.data \
+    > m.data
+
+curl -X PUT \
+    -H "X-Auth-Token: f460a61d6e49434689c27cece3ef257d" \
+    -T "/root/Desktop/mytest2.jar" \
+    http://192.168.0.55:8888/v1/AUTH_86e5ae17b73749b3957886c5ad512ba0/algo/
+
+curl -X DELETE \
+    -H "X-Auth-Token: 5d7747b6a034486193cd3ba0621b7a49" \
+    http://192.168.0.55:8888/v1/AUTH_86e5ae17b73749b3957886c5ad512ba0/test/1.data
+
+
+
+

@@ -1,0 +1,53 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+{% load staticfiles %}
+<title>juan</title>
+<link rel="stylesheet" type="text/css" href="{% static "css.css" %}"></link>
+<script type="text/javascript" src="{% static "js.js" %}"></script>
+</head>
+<body class="body">
+{% include '_head.html' %}
+<div class="content">
+  <div class="sub_nav">
+      {% include 'vh/_sub_nav.html' %}
+      <script language="javascript" type="text/javascript">
+      document.getElementById('sub8').style.cssText += "background:#FFFFFF;width:148px;border-bottom:#9bcff7 2px solid;";
+      </script>
+  </div>
+  <div class="contentBox">
+    {% include '_mes.html' %}
+    <a href="/virtualHost/access/floating_ip/allocate/" >为项目申请IP</a>
+  <table>
+  <tr>
+    <td>编号</td>
+    <td>IP地址</td>
+    <td>虚拟主机</td>
+    <td>IP池</td>
+    <td>操作</td>
+  </tr>
+  {% for floatingIp in floatingIpList %}
+  <tr>
+    <td>{{ floatingIp.id }}</td>
+    <td>{{ floatingIp.ip }}</td>
+    <td>{{ floatingIp.instance_id }}</td>
+    <td>{{ floatingIp.pool }}</td>
+    <td>
+      {% if floatingIp.instance_id %}
+        <a href="/virtualHost/access/floating_ip/unassociate/?ip={{ floatingIp.ip }}&server={{ floatingIp.instance_id }}" >
+            解除绑定</a>
+        <!--<a href="/virtualHost/access/floating_ip/deallocates/{{ floatingIp.id }}/" >释放IP</a>-->
+      {% else %}
+        <a href="/virtualHost/access/floating_ip/associate/?ip={{ floatingIp.id }}" >绑定IP到主机</a>
+        <a href="/virtualHost/access/floating_ip/deallocates/{{ floatingIp.id }}/" >释放IP</a>
+      {% endif %}
+    </td>
+  </tr>
+  {% endfor %}
+  </table>
+  </div>
+</div>
+{% include '_foot.html' %}
+</body>
+</html>

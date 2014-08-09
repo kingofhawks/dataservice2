@@ -1,0 +1,109 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+{% load staticfiles %}
+<title>数据分析</title>
+<link rel="stylesheet" type="text/css" href="{% static "css.css" %}"></link>
+<script type="text/javascript" src="{% static "js.js" %}"></script>
+</head>
+<body class="body">
+{% include '_head.html' %}
+<div class="content">
+  <div class="sub_nav">
+      {% include 'dp/_sub_nav.html' %}
+      <script language="javascript" type="text/javascript">
+      document.getElementById('sub3').style.cssText += "background:#FFFFFF;width:148px;border-bottom:#9bcff7 2px solid;";
+      </script>
+  </div>
+  <div class="contentBox">
+    {% include '_mes.html' %}
+    <a href="/dataProcessing/collection/set/">定制数据集</a>
+    &nbsp;&nbsp;&nbsp;
+    <a href="/dataProcessing/collection/cart/">查看当前数据集(共{{ countf }}个文件)</a>
+    <br />
+    <a href="/dataProcessing/algorithm/set/">定制算法库</a>
+    &nbsp;&nbsp;&nbsp;
+    <a href="/dataProcessing/algorithm/cart/">查看当前算法库(共{{ counta }}个文件)</a>
+    <br /><br />
+    <form action="/dataProcessing/launch/submit/" method="POST">
+      <label>分析过程标记名称</label><br />
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      <input type="text" name="processName"
+        {% if processName %}
+          value="{{ processName }}"
+        {% endif %} 
+      ></input><br />
+      <label>所属项目</label><br />
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      <input type="text" name="project" value="{{ project }}" disabled="disabled"></input><br />
+      <!--<label>使用算法</label><br />
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      <input type="text" name="algo"></input><br />-->
+      <label>命名结果存储空间</label><br />
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      <input type="text" name="processOutput"
+        {% if output %}
+          value="{{ output }}"
+        {% endif %} 
+      ></input><br />
+      <label>节点统一标记名称</label><br />
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      <input type="text" name="serverLabel"
+        {% if serverLabel %}
+          value="{{ serverLabel }}"
+        {% endif %}
+      ></input><br />
+      <label>主机性能配置</label><br />
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      <select id="serverFlavor" name="serverFlavor">
+        <option value=""             
+          {% if serverFlavor %}
+          {% else %}
+            selected="selected"
+          {% endif %}
+        >--select--</option>
+        {% for flavor in flavorList %}
+          <option value="{{ flavor.id }}"    
+            {% ifequal serverFlavor flavor.id %}
+              selected="selected"
+            {% endifequal %}
+          >{{ flavor.name }}</option>  
+        {% endfor %}
+      </select><br />
+      <label>集群规模</label><br />
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      <input type="text" name="serverCount"
+        {% if serverCount %}
+          value="{{ serverCount }}"
+        {% endif %}
+      ></input><br />
+      <label>集群访问入口</label><br />
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      <select name="nameIP">
+        <option value=""
+          {% if nameIP %}
+          {% else %}
+            selected="selected"
+          {% endif %}
+        >---请选择---</option>
+        {% for nameIP in nameIPList %}
+          <option value="{{ nameIP.ip }}"
+          {% ifequal nameIP.ip nameIPvalue %}
+            selected="selected"
+          {% endifequal %} 
+          >{{ nameIP.ip }}</option>  
+        {% endfor %}
+      </select><br />
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      <input type="submit" value="启动进程"></input>
+    </form>
+  </div>
+</div>
+{% include '_foot.html' %}
+</body>
+</html>

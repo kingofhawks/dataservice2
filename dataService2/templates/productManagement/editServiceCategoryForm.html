@@ -1,0 +1,32 @@
+<html>
+<head>
+	<meta charset="UTF-8"/>
+	<title>编辑服务类型信息</title>
+</head>
+<body>
+<center>
+
+{% for serviceCategory in serviceCategoryInfo %}
+<form action="../editServiceCategory" method="POST">
+	<table width='70%'>
+		<tr>
+			<td>服务类型</td>
+			<td><input type='text' name='name' value='{{serviceCategory.name}}' required="required"/></td>
+		</tr>
+		<tr>
+			<td>说明</td>
+			<td><input type='textarea' name='comment' value='{{serviceCategory.comment}}'/></td>
+		</tr>		
+		<tr>
+			<td><input type="hidden" name='id' value='{{serviceCategory.id}}'/> </td>
+			<td>
+				<input type="submit" name="update " value="确定"/>
+				<input type="button" name="return" value="取消" onClick="history.back()"/>
+			</td>
+		</tr>
+	</table>
+</form>
+{% endfor %}
+</center>
+</body>
+</html>

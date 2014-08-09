@@ -1,0 +1,35 @@
+{% load staticfiles %}
+集群中的节点状态：<br />
+  <table>
+  <tr>
+    <td>节点名称</td>
+    <td>节点地址</td>
+    <td>配置信息</td>
+    <td>节点状态</td>
+    <td>当前任务</td>
+  </tr>
+  {% for server in serverList %}
+  <tr>
+    <td><a href="/virtualHost/server/{{ server.id }}/detail/">{{ server.name }}</a></td>
+    <td>
+        {% for add in server.addresses.private %}
+            {{ add.addr }}<br />
+        {% endfor %}
+    </td>
+    <td>{{ server.flavorInfo.name }}
+        |{{ server.flavorInfo.vcpus }}
+        |{{ server.flavorInfo.swap }}
+        |{{ server.flavorInfo.ram }}
+        |{{ server.flavorInfo.disk }}
+    </td>
+    <td>
+      <img src="{% static "img/status/" %}{{ server.status }}"/>
+      {{ server.status }}
+    </td>
+    <td>
+      <img src="{% static "img/status/" %}{{ server.task_state }}" />
+      {{ server.task_state }}
+    </td>
+  </tr>
+  {% endfor %}
+  </table>

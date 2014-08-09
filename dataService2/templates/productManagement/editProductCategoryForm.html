@@ -1,0 +1,41 @@
+<html>
+<head>
+	<meta charset="UTF-8"/>
+	<title>编辑产品种类信息</title>
+</head>
+<body>
+<center>
+{% for productCategory in productCategoryInfo %}
+<form action="../editProductCategory" method="POST">
+	<table width='70%'>
+		<tr>
+			<td>产品类型</td>
+			<td><input type='text' name='name' value='{{productCategory.name}}' required="required"/></td>
+		</tr>
+			<td>服务类型</td>
+			<td>
+			{% for serviceCategory in serviceCategorys %}
+				{% ifequal productCategory.serviceCategoryId serviceCategory.id %}
+				<input type='radio' name='serviceCategory' value='{{serviceCategory.id}}' checked='checked'/>{{serviceCategory.name}}
+				{% else %}
+				<input type='radio' name='serviceCategory' value='{{serviceCategory.id}}'/>{{serviceCategory.name}}
+				{% endifequal %}
+			{% endfor %}				
+			</td>
+		<tr>
+			<td>说明</td>
+			<td><input type='textarea' name='comment' value='{{productCategory.comment}}'/></td>
+		</tr>		
+		<tr>
+			<td><input type="hidden" name='id' value='{{productCategory.id}}'/> </td>
+			<td>
+				<input type="submit" name="update " value="确定"/>
+				<input type="button" name="return" value="取消" onClick="history.back()"/>
+			</td>
+		</tr>
+	</table>
+</form>
+{% endfor %}
+</center>
+</body>
+</html>

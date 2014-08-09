@@ -1,0 +1,178 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+{% load staticfiles %}
+<title>个人首页</title>
+<link rel="stylesheet" type="text/css" href="{% static "css.css" %}"></link>
+<script type="text/javascript" src="{% static "js.js" %}"></script>
+</head>
+<body class="body">
+{% include '_head.html' %}
+  <div class="content">
+    <div class="sub_nav">
+      {% include 'my/_sub_nav.html' %}
+      <script language="javascript" type="text/javascript">
+      document.getElementById('sub1').style.cssText += "background:#FFFFFF;width:147px;border-bottom:#9bcff7 2px solid;";
+      </script>
+    </div>
+    <div class="contentBox">
+      {% include '_mes.html' %}
+      登录帐号：{{ lName }}<br />
+      电子邮箱：{{ email }}<br />
+      账户余额：{{ balance }}<br />
+      帐号类型：{{ accType }}<br />
+      {% if master %}
+      所属账户：{{ master }}  {{ shiming }}<br />
+      {% else %}
+      实名认证：{{ shiming }}<br />
+      {% endif %}
+      {% if shimingHref %}
+      <a href="/my/rnta/" >进行认证</a><br />
+      {% endif %}
+      最后登录：{{ lastLogin }}<br />
+      注册时间：{{ createTime }}<br />
+      {% if res %}
+      <br />
+      <!--<table>
+        <tr>
+          <td colspan="2" align="center">当前参与的项目</td>
+          <td colspan="2" align="right">
+          <a href="/my/project/create/">创建新项目</a>&nbsp;
+          <a href="/my/project/list/" >查看全部</a>
+          </td>
+        </tr>
+        <tr>
+          <td>项目名称</td>
+          <td>所任角色</td>
+          <td>创建时间</td>
+          <td>项目描述</td>
+        </tr>
+        {% for line in res %}
+        <tr>
+          {% for e in line %}
+          <td>
+            {{ e }}
+          </td>
+          {% endfor %}
+        </tr>
+        {% endfor %}
+      </table>
+      {% else %}
+      当前帐号暂时没有参与的项目<a href="/my/project/create/">创建新项目</a>
+      {% endif %}
+      <br /><br />
+      {% if userList %}
+      <table>
+        <tr>
+          <td colspan="3">当前已有子账户</td>
+          <td colspan="2" align="right">
+          <a href="/my/user/create/" >创建子账户</a>
+          <a href="/my/user/list/" >查看全部</a>
+          </td>
+        </tr>
+        <tr>
+          <td>用户名</td>
+          <td>所属项目</td>
+          <td>所任角色</td>
+          <td>最后登录</td>
+        </tr>
+        {% for user in userList %}
+        <tr>
+          <td>{{ user.loginName }}</td>
+          <td>
+            {% for t_i in user.tenantName %}
+              <p>{{ t_i }}</p>
+            {% endfor %}
+          </td>
+          <td>
+            {% for r_i in user.roleName %}
+              <p>{{ r_i }}</p>
+            {% endfor %}
+          </td>
+          <td>{{ user.create_at }}</td>
+        </tr>
+        {% endfor %}
+      </table>
+      {% else %}
+      当前帐号暂时没有可用的子账户<a href="/my/user/create/">创建子账户</a>
+      {% endif %}
+        <p>--------------------------------------------------------------------</p>-->
+      {% if projectList %}
+      <table border="1">
+        <tr>
+          <td colspan="3" align="center">当前参与的项目</td>
+          <td colspan="2" align="right">
+          {% if master %}
+          {% else %}
+            <a href="/my/project/create/">创建新项目</a>&nbsp;
+          {% endif %}
+          <a href="/my/project/list/" >查看全部</a>
+          </td>
+        </tr>
+        <tr>
+          <td>项目名称</td>
+          <td>所任角色</td>
+          <td>创建时间</td>
+          <td>描述说明</td>
+        </tr>
+        {% for pro in projectList %}
+        <tr>
+          <td>{{ pro.name }}</td>
+          <td>{{ pro.role }}</td>
+          <td>{{ pro.desc }}</td>
+          <td>{{ pro.time }}</td>
+        </tr>
+        {% endfor %}
+      </table>
+      {% else %}
+      当前帐号暂时没有参与的项目<a href="/my/project/create/">创建新项目</a>
+      {% endif %}
+      <br /><br />
+      {% if master %}
+        <br />
+      {% else %}
+        {% if userList %}
+        <table border="1">
+          <tr>
+            <td colspan="5">当前已有子账户</td>
+            <td align="right">
+            <a href="/my/user/create/" >创建子账户</a>
+            <a href="/my/user/list/" >查看全部</a>
+            </td>
+          </tr>
+          <tr>
+            <td>用户名称</td>
+            <td>电子邮箱</td>
+            <td>所属项目</td>
+            <td>所任角色</td>
+            <td>现有余额</td>
+            <td>加入时间</td>
+          </tr>
+          {% for user in userList %}
+          <tr>
+            <td>{{ user.loginName }}</td>
+            <td>{{ user.email }}</td>
+            <td>
+              {% for t_i in user.tenants %}
+                <p>{{ t_i }}</p>
+              {% endfor %}
+            </td>
+            <td>
+              {% for r_i in user.roles %}
+                <p>{{ r_i }}</p>
+              {% endfor %}
+            </td>
+            <td>{{ user.balance }}</td>
+            <td>{{ user.create_at }}</td>
+          {% endfor %}
+        </table>
+        {% else %}
+        当前帐号暂时没有可用的子账户<a href="/my/user/create/">创建子账户</a>
+        {% endif %}
+      {% endif %}
+    </div>
+  </div>
+{% include '_foot.html' %}
+</body>
+</html>

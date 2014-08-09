@@ -1,0 +1,23 @@
+
+<table width="100%">
+	<tr>
+		<td>交易号</td>
+		<td>帐号</td>
+		<td>款项</td>
+		<td>充值</td>
+		<td>支出</td>
+		<td>交易日期</td>
+		<td>说明</td>
+	</tr>
+	{% for transaction in transactions %}
+	<tr>
+		<td>{{transaction.transactionId}}</td>
+		<td>{{transaction.accountId}}</td>
+		<td>{{transaction.item}}</td>
+		<td>{{transaction.deposit}}</td>
+		<td>{{transaction.expense}}</td>
+		<td>{{transaction.transactionDate}}</td>
+		<td>{{transaction.comment}}</td>
+	</tr>
+	{% endfor %}
+</table>

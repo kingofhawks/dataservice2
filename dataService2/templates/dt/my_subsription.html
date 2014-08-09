@@ -1,0 +1,43 @@
+{% extends 'dt/base_market.html' %}
+{% load staticfiles %}
+{% load render_table from django_tables2 %}
+{% block main %}
+	<ul class="nav nav-tabs"  id="myTab">
+		  <li class="active"><a href="#order" data-toggle="tab">我的数据</a></li>
+		  <li><a href="#auth" data-toggle="tab">账户密钥</a></li>	  
+	</ul>
+	<div class="tab-content">
+	  <div class="tab-pane active" id="order">
+		  {% render_table table %} 
+      </div>
+	  <div class="tab-pane" id="auth">
+	  	REST API访问密钥:<div id="key">{{key}}</div>
+	  	<button type="button" class="btn btn-primary" id="api">
+			 生成密钥
+		</button>
+		
+	  </div>	  
+	</div>
+{% endblock %}
+{% block js %}
+{{ block.super }}
+<script type="text/javascript" src="{% static "js/jquery-2.0.1.min.js" %}"></script>
+<script type="text/javascript" src="{% static "js/bootstrap.min.js" %}"></script>
+
+<script type="text/javascript">
+	$('#myTab a').click(function (e) {
+	  e.preventDefault();
+	  $(this).tab('show');
+	})
+	
+	$('#api').click(function (e) {
+		//Must define data for AJAX post in django
+		var postdata={
+		          'csrfmiddlewaretoken': '{{ csrf_token }}'
+		     }
+		$.post("/market/apikey/",postdata,function(result){
+		    $("#key").text(result.key);
+		});
+	})
+</script>
+{% endblock %}

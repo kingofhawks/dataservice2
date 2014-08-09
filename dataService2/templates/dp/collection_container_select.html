@@ -1,0 +1,47 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+{% load staticfiles %}
+<title>存储服务</title>
+<link rel="stylesheet" type="text/css" href="{% static "css.css" %}"></link>
+<script type="text/javascript" src="{% static "js.js" %}"></script>
+</head>
+<body class="body">
+{% include '_head.html' %}
+<div class="content">
+  <div class="sub_nav">
+      {% include 'dp/_sub_nav.html' %}
+      <script language="javascript" type="text/javascript">
+      document.getElementById('sub3').style.cssText += "background:#FFFFFF;width:148px;border-bottom:#9bcff7 2px solid;";
+      </script>
+  </div>
+  <div class="contentBox">
+    {% include '_mes.html' %}
+    <a href="/dataProcessing/collection/cart/" >查看当前数据集(已有{{ count }}个文件)</a>
+    {% if container_list %}
+      <table>
+        <tr>
+          <td>名称</td>
+          <td>对象数量</td>
+          <td>占用空间</td>
+          <td>操作</td>
+        </tr>
+      {% for container in container_list %}
+        <tr>
+          <td>{{ container.name }}</td>
+          <td>{{ container.count }}</td>
+          <td>{{ container.bytes }}</td>
+          <td>
+            <a href="/dataProcessing/collection/{{ container.name }}/" >进入</a>
+          </td>
+        </tr>
+      {% endfor %}
+      </table>
+    {% else %}
+    {% endif %}
+  </div>
+</div>
+{% include '_foot.html' %}
+</body>
+</html>

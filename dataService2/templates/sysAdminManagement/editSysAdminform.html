@@ -1,0 +1,48 @@
+<html>
+<head>
+	<meta charset="UTF-8"/>
+	<title>编辑管理员信息</title>
+</head>
+<body>
+<center>
+{% for sysAdmin in sysAdminInfo %}
+<form action="../editSysAdmin" method="POST">
+	<table width='70%'>
+		<tr>
+			<td>名称</td>
+			<td><input type='text' name='name' value='{{sysAdmin.name}}' required="required"/></td>
+		</tr>
+		<tr>
+			<td>密码</td>
+			<td><input type="password" name='password' value='{{sysAdmin.password}}' required="required"/></td>
+		</tr>
+		<tr>
+			<td>邮箱</td>
+			<td><input type="email" name='email' value='{{sysAdmin.email}}' required="required"/></td>
+		</tr>
+		<tr>
+			<td>级别</td>
+			<td>
+				<select name="group">
+				{% for adminGroup in adminGroups %}
+				{% ifequal adminGroup.id sysAdmin.adminGroupId %}
+					<option value='{{adminGroup.id}}' selected="selected">{{adminGroup.name}}</option>
+				{% else %}
+					<option value='{{adminGroup.id}}'>{{adminGroup.name}}</option>
+				{% endifequal %}
+				{% endfor %}
+			</select>
+			</td>
+		</tr>
+		<tr>
+			<td><input type="hidden" name='id' value='{{sysAdmin.id}}'/> </td>
+			<td>
+				<input type="submit" name="update " value="确定"/>
+				<input type="button" name="return" value="取消" onClick="history.back()"/>
+			</td>
+		</tr>
+		</table>
+{% endfor %}
+</center>
+</body>
+</html>

@@ -1,0 +1,41 @@
+<html>
+<head>
+	<meta charset="UTF-8"/>
+	<title>产品列表</title>
+</head>
+<body>
+<center>
+<input type="button" name="add" value="新建产品" onClick="javascript:window.location.href='new';return false;"/>
+<table width="90%">
+	<tr>
+		<td>产品名</td>
+		<td>产品种类</td>
+		<td>是否激活</td>		
+		<td>价格</td>
+		<td>单位</td>		
+		<td></td>
+	</tr>
+	{% for product in products %}
+	<tr>
+		<td>{{product.1}}</td>
+		<td>{{product.2}}</td>
+		<td>
+			{% ifequal product.3 "0" %}
+			否
+			{% else %}
+			是
+			{% endifequal %}
+		</td>
+		<td>{{product.4}}</td>
+		<td>{{product.5}}</td>
+		<td>
+			
+			<a href='detail/{{product.0}}'>详细信息</a>
+			<a href='edit/{{product.0}}'>编辑</a>
+			<a href='del/{{product.0}}'>注销</a>
+		</td>
+	</tr>
+	{% endfor %}
+</center>
+</body>
+</html>

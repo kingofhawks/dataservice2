@@ -1,0 +1,36 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+{% load staticfiles %}
+<title>juan</title>
+<link rel="stylesheet" type="text/css" href="{% static "css.css" %}"></link>
+<script type="text/javascript" src="{% static "js.js" %}"></script>
+</head>
+<body class="body">
+{% include '_head.html' %}
+<div class="content">
+  <div class="sub_nav">
+      {% include 'vh/_sub_nav.html' %}
+      <script language="javascript" type="text/javascript">
+      document.getElementById('sub4').style.cssText += "background:#FFFFFF;width:148px;border-bottom:#9bcff7 2px solid;";
+      </script>
+  </div>
+  <div class="contentBox">
+    {% include '_mes.html' %}
+    Create Volume Snapshot<br />
+    <form action="/virtualHost/volume/{{ volumeId }}/createsnapshot/submit/" method="POST">
+      <label>快照名称</label><br />
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      <input type="text" name="snapshotName"></input><br />
+      <label>快照miaoshu</label><br />
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      <input type="text" name="snapshotDesc"></input><br />
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      <input type="submit" value="创建"></input>
+    </form>
+  </div>
+</div>
+{% include '_foot.html' %}
+</body>
+</html>

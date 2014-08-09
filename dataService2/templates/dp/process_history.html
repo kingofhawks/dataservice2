@@ -1,0 +1,47 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+{% load staticfiles %}
+<title>数据分析</title>
+<link rel="stylesheet" type="text/css" href="{% static "css.css" %}"></link>
+<script type="text/javascript" src="{% static "js.js" %}"></script>
+</head>
+<body class="body">
+{% include '_head.html' %}
+<div class="content">
+  <div class="sub_nav">
+      {% include 'dp/_sub_nav.html' %}
+      <script language="javascript" type="text/javascript">
+      document.getElementById('sub2').style.cssText += "background:#FFFFFF;width:148px;border-bottom:#9bcff7 2px solid;";
+      </script>
+  </div>
+  <div class="contentBox">
+    {% include '_mes.html' %}
+    <table>
+      <tr>
+        <td>name</td>
+        <td>tenant</td>
+        <td>user</td>
+        <td>status</td>
+        <td>create_at</td>
+      </tr>
+      {% for dp in dpList %}
+      <tr>
+        <td>
+          <a href="/dataProcessing/{{ dp.id }}/detail/" >{{ dp.name }}</a>
+        </td>
+        <td>{{ dp.tenant }}</td>
+        <td>{{ dp.user }}</td>
+        <td>
+          <a href="/dataProcessing/monitor/{{ dp.id }}/" >{{ dp.status }}</a>
+		</td>
+        <td>{{ dp.create_at }}</td>
+      </tr>
+      {% endfor %}
+    </table>
+  </div>
+</div>
+{% include '_foot.html' %}
+</body>
+</html>

@@ -1,0 +1,38 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+{% load staticfiles %}
+<title>存储服务</title>
+<link rel="stylesheet" type="text/css" href="{% static "css.css" %}"></link>
+<script type="text/javascript" src="{% static "js.js" %}"></script>
+</head>
+<body class="body">
+{% include '_head.html' %}
+<div class="content">
+  <div class="sub_nav">
+      {% include 'cs/_container_nav.html' %}
+      <script language="javascript" type="text/javascript">
+      document.getElementById('{{ container.name }}').style.cssText += "background:#FFFFFF;width:148px;border-bottom:#9bcff7 2px solid;";
+      </script>
+  </div>
+  <div class="contentBox">
+    {% include '_mes.html' %}
+    当前容器：{{ container_name }}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    对象数量：{{ container_metadata.object_count }}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    总计大小：{{ container_metadata.bytes }}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    日期：{{ container_metadata.date }}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    <form action="/cloudStorage/folder/create/submit/" method="POST">
+      <label>所属容器：</label>
+      <input type="text" name="container" value="{{ container_name }}"></input><br />
+      <label>创建位置：</label>
+      <input type="text" name="folderPath" value="{{ path }}"></input><br />
+      <label>文件夹名：</label>
+      <input type="text" name="folderName"></input><br />
+      <input type="submit" value="创建文件夹"></input>
+    </form>
+  </div>
+</div>
+{% include '_foot.html' %}
+</body>
+</html>

@@ -1,0 +1,46 @@
+<html>
+<head>
+	<title>套餐列表</title>
+</head>
+<body>
+<center>
+<input type="button" name="add" value="新建套餐" onClick="javascript:window.location.href='new';return false;"/>
+<table width='90%' border='1'>
+	<tr>
+		<td>套餐</td>
+		<td>套餐内容</td>
+		<td>使用期限</td>
+		<td>价格</td>
+		<td>是否激活</td>
+		<td>说明</td>
+		<td></td>
+	</tr>
+	
+	{% for package in packages %}	
+	<tr>
+		<td>{{package.name}}</td>
+		<td>			
+			{% load tariff_transform %}
+			{% transform_productDetail package.packageDetail %}			  
+		</td>
+		<td>{{package.timeLimit}}/24h</td>
+		<td>{{package.price}}</td>
+		<td>
+			{% ifequal package.isActive "0" %}
+			否
+			{% else %}
+			是
+			{% endifequal %}
+		</td>
+		<td>{{package.comment}}</td>
+		<td>
+			{% load truncateTariff_filter %}			
+			<a href='edit/{{package.id}}'>编辑</a>
+			<a href='del/{{package.id}}'>注销</a>
+		</td>
+	</tr>
+	{% endfor %}
+</table>
+</center>
+</body>
+</html>

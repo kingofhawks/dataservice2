@@ -1,0 +1,243 @@
+<html>
+  <head>
+    <meta content='text/html; charset=utf-8' http-equiv='Content-Type' />
+    <title>数据分析</title>
+    <link href='/static/dashboard/css/my.css' media='screen' rel='stylesheet' />
+    <script type="text/javascript" language="javascript">
+      function re()
+      {
+        closemenu('tenant_list');
+        document.getElementById('resultdata').value=''
+        document.getElementById('resultalgo').value=''
+      }
+      function checkedit(){
+/*        alert('check');*/
+        datavalue=document.dmform.resultdata.value;
+        algovalue=document.dmform.resultalgo.value;
+        outfile=document.dmform.outfile.value;
+/*        c=document.getElementById('resultdata').value*/
+        if(datavalue=='')
+        {
+          alert("请至少选择一个数据文件");
+          return false;
+        }
+        else
+        {
+          if(algovalue=='')
+          {
+            alert("请按要求选择算法文件");
+            return false;
+          }
+          else
+          {
+            if(outfile=='')
+            {
+              alert("请填写输出文件夹");
+              return false;
+            }
+            else
+            {
+              return true;
+            }
+          }
+        }
+      }
+    </script>
+  </head>
+  <body id="" onload="re()">
+    <div id="container" class='container'>
+        <div class='container_head'>
+            <div class="brand">
+                <a href="/home/"><div class="tu"></div></a>
+            </div>
+            <div id="user_info" class="userinfo"><span><a href="/settings/">admin </a></span>
+                 <a href="/auth/logout/">&nbsp;退出</a>
+            </div>
+        </div>
+<div class='sidebar'>
+  <!--project admin-->
+<div class='clearfix'>
+  <ul class="nav nav-tabs">
+          <li class="active">
+              <a href="/nova/" tabindex='1'>项目</a>
+          </li>
+          <li>
+              <a href="/syspanel/" tabindex='1'>管理员</a>
+          </li>
+  </ul>
+</div>
+  <!--project -->
+   <div id="tenant_switcher" class="switcher_bar" tabindex='1'>
+    <div class="current_tenant">
+      <a href="javascript: onClick=showmenu('tenant_list') ">项目 : admin</a>
+    </div>
+    <div id="tenant_list">
+          <div class="tenant_name"><a href="/auth/switch/02023e0271504682b05598585ad3ac1c/">admin</a></div>
+    </div>
+  </div>
+  <!--computer store-->
+      <h4>虚拟主机管理</h4>
+      <ul class="main_nav">
+          <li>
+            <a href="/nova/" class="active" tabindex='1'>概述</a>
+          </li>
+          <li>
+            <a href="/nova/instances_and_volumes/"  tabindex='1'>虚拟主机 &amp; 卷</a>
+          </li>
+          <li>
+            <a href="/nova/images_and_snapshots/"  tabindex='1'>镜像 &amp; 快照</a>
+          </li>
+          <li>
+            <a href="/nova/access_and_security/"  tabindex='1'>访问 &amp; 安全性</a>
+          </li>
+      </ul>
+      <h4>文件存储</h4>
+      <ul class="main_nav">
+          <li>
+            <a href="/nova/containers/"  tabindex='1'>文件夹</a>
+          </li>
+      </ul>
+  <div>
+    <h4>数据挖掘</h4>
+    <ul class="main_nav">
+      <li><a href="/datamining-form/"  tabindex='1'>数据分析</a></li>
+    </ul>
+  </div>
+</div>
+  <div id='main_content' class='content'>
+  <div class='page-header'>
+    <span>概述</span>
+  </div>
+<div class="messages">
+</div>
+</div>
+
+<div id='main_content' class='content'>
+  <div class='page-header'>
+    <span>数据分析</span>
+  </div>
+<div class="messages"></div>
+<div class="table_wrapper">
+  <form action="/datamining/submit/" name="dmform" method="post" 
+        onSubmit="return checkedit();">
+    <table>
+      <tr>
+        <td>可选数据文件<br/><span style="font-size:0.78em;font-weight:600;">注：至少选择一个数据文件</span></td>
+        <td></td>
+        <td>已选数据文件<br/><span style="font-size:0.78em;">&nbsp;</span></td>
+        <td width=30px><td>
+        <td width=100px>可选算法文件<br/><span style="font-size:0.78em;font-weight:600;">注：必须包含一个".jar"，".itmes"和".java"文件</span></td>
+        <td></td>
+        <td>已选算法文件<br/><span style="font-size:0.78em;">&nbsp;</span></td>
+      </tr>
+      <tr>
+        <td>
+          <select name="leftdata" id="leftdata" multiple size=15 style="width:220px;"
+                  ondblclick="moveOption(document.getElementById('leftdata'), document.getElementById('rightdata'))">
+            {% for data in datalist %}
+            <option value="{{ data }}">{{ data }}</option>
+            {% endfor %}
+          </select>
+        </td>
+        <td>
+          <table>
+            <tr>
+              <td>加入</td></tr>
+            <tr>
+              <td><input type="button" value=" >> " 
+                  onClick="moveOption(document.getElementById('leftdata'), document.getElementById('rightdata'))">
+              </td>
+            </tr>
+            <tr>
+              <td>去除</td>
+            </tr>
+            <tr>
+              <td><input type="button" value=" << " 
+                    onClick="moveOption(document.getElementById('rightdata'),document.getElementById('leftdata'))"></td>
+            </tr>
+          </table>
+          <input type="text" name="resultdata" id="resultdata" value="" 
+                 style="color: #EEF2FB; background-color: #EEF2FB; border: #EEF2FB; width: 2px; height: 2px;"/>
+        </td>
+        <td>
+          <select name="rightdata" id="rightdata" multiple style="width: 160px;" size=15
+                  ondblclick="moveOption(document.getElementById('rightdata'), document.getElementById('leftdata'))">
+          </select>
+        </td>
+
+        <td><td>
+
+
+        <td>
+          <select name="leftalgo" id="leftalgo" multiple size=15 style="width:220px;"
+                  ondblclick="moveOption2(document.getElementById('leftalgo'), document.getElementById('rightalgo'))">
+            {% for algo in algolist %}
+            <option value="{{ algo }}">{{ algo }}</option>
+            {% endfor %}
+          </select>
+        </td>
+        <td>
+          <table>
+            <tr>
+              <td>加入</td>
+            </tr>
+            <tr>
+              <td><input type="button" value=" >> " 
+                  onClick="moveOption2(document.getElementById('leftalgo'), document.getElementById('rightalgo'))">
+              </td>
+            </tr>
+            <tr>
+              <td>去除</td>
+            </tr>
+            <tr>
+              <td><input type="button" value=" << " 
+                    onClick="moveOption2(document.getElementById('rightalgo'),document.getElementById('leftalgo'))"></td>
+              </tr>
+            </tr>
+          </table>
+          <input type="text" name="resultalgo" id="resultalgo" value="" 
+                 style="color: #EEF2FB; background-color: #EEF2FB; border: #EEF2FB; width: 2px; height: 2px;"/>
+        </td>
+        <td>
+          <select name="rightalgo" id="rightalgo" multiple style="width: 160px;" size=15
+                  ondblclick="moveOption2(document.getElementById('rightalgo'), document.getElementById('leftalgo'))">
+          </select>
+        </td>
+      </tr>
+      <tr>
+        <td colspan=6>
+            输出文件夹 : <input type="text" name="outfile" value="" />
+            <input type="submit" value="开始" />
+        </td>
+      </tr>
+    <table>
+  </form>
+</div>
+</div>
+</div>
+   
+<div id="footer"></div>
+
+<script src='/static/horizon/js/my.js' type='text/javascript' charset="utf-8"></script>
+<script src='/static/horizon/js/jquery/jquery.min.js' type='text/javascript' charset="utf-8"></script>
+<script src='/static/horizon/js/json2.js' type='text/javascript' charset="utf-8"></script>
+<script src='/static/horizon/js/jquery/jquery.cookie.js' type='text/javascript' charset="utf-8"></script>
+<!--<script src='/static/horizon/js/jquery/jquery.quicksearch.js' type='text/javascript' charset="utf-8"></script>-->
+<script src='/static/horizon/js/jquery/jquery.example.min.js' type='text/javascript' charset="utf-8"></script>
+<script src="/static/horizon/js/jquery/jquery.table-sorter.js" type="text/javascript" charset="utf-8"></script>
+<script src="/static/bootstrap/js/bootstrap.min.js" type="text/javascript" charset="utf-8"></script>
+<script src="/static/horizon/js/hogan-1.0.5.min.js" type="text/javascript" charset='utf-8'></script>
+<script src='/static/horizon/js/horizon.js' type='text/javascript' charset='utf-8'></script>
+<script type='text/javascript' charset='utf-8'></script>
+<script src='/static/horizon/js/tabs.js' type='text/javascript' charset='utf-8'></script>
+<script src='/static/horizon/js/plugins.js' type='text/javascript' charset='utf-8'></script>
+<script src='/static/horizon/js/tables.js' type='text/javascript' charset='utf-8'></script>
+<script src='/static/horizon/js/modals.js' type='text/javascript' charset='utf-8'></script>
+<script src='/static/horizon/js/forms.js' type='text/javascript' charset='utf-8'></script>
+<script src='/static/horizon/js/form_examples.js' type='text/javascript' charset='utf-8'></script>
+<script type="text/html" id="modal_template"></script>
+<script type="text/html" id="empty_row_template"></script>
+<script type="text/html" id="alert_message_template"></script>
+</body>
+</html>
+

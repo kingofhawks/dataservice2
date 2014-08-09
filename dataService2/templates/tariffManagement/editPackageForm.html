@@ -1,0 +1,64 @@
+<html>
+<head>
+	<title>编辑套餐信息</title>
+</head>
+<body>
+<center>
+{% for package in packageInfo %}
+<form method='POST' action='../editPackage'>
+<table widht=70%>
+	<tr>
+		<td>套餐名</td>
+		<td><input type='text' name='name' value='{{package.name}}' required="required"/></td>
+	</tr>
+	<tr>
+		<td>套餐内容</td>
+		<td>
+			{% for product in products %}
+				{% if product.0 in package.packageDetail %}
+				<input type="checkbox" name="productId" value='{{product.0}}' checked='checked'/>{{product.1}}
+				{% else %}
+				<input type="checkbox" name="productId" value='{{product.0}}' />{{product.1}}
+				{% endif %}
+			{% endfor %}
+		</td>
+	</tr>
+	<tr>
+		<td>使用期限</td>
+		<td><input type='text' name='timeLimit' value='{{package.timeLimit}}'/></td>
+	</tr>
+	<tr>
+		<td>单价</td>
+		<td><input type="number" step='any' name="price" required="required" value='{{package.price}}'/></td>
+	</tr>
+	<tr>
+		<td>是否激活</td>
+		<td>
+			{% ifequal package.isActive '0' %}
+			<input type='radio' name='isActive' value='0' checked='checked'/>否
+			<input type='radio' name='isActive' value='1'/>是
+			{% else %}
+			<input type='radio' name='isActive' value='0' />否
+			<input type='radio' name='isActive' value='1' checked='checked'/>是
+			{% endifequal %}
+		</td>
+	</tr>
+	<tr>
+		<td>说明</td>
+		<td>
+			<textarea rows="2" cols="30" name='comment'>{{package.comment}}</textarea>
+		</td>
+	</tr>
+	<tr>
+		<td><input type="hidden" name='id' value='{{package.id}}'/> </td>
+		<td>
+			<input type="submit" name="update " value="确定"/>
+			<input type="button" name="return" value="取消" onClick="history.back()"/>
+		</td>
+	</tr>
+</table>
+</form>
+{% endfor %}
+</center>
+</body>
+</html>

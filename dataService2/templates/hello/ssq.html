@@ -1,0 +1,41 @@
+<html>
+  <head>
+    <title>ssq</title>
+  </head>
+  <body>
+  押中记录:
+  总次数: {{ zhong_count }}
+  总金额：{{ zhong_all }}
+  <table border="1" >
+    <tr>
+      <td>日期</td>
+      <td>期次</td>
+      <td>号码</td>
+      <td>金额</td>
+    </tr>
+    {% for zrec in zhong_list %}
+    <tr>
+      {% for e in zrec %}
+      <td>{{ e }}</td>
+      {% endfor %}
+    </tr>
+    {% endfor %}
+  </table>
+  全部记录:
+  <table border="1">
+    <tr>
+      <td>日期</td>
+      <td>期次</td>
+      <td>号码</td>
+      <td>销量</td>
+    </tr>
+    {% for rec in all_list %}
+    <tr>
+      {% for e in rec %}
+      <td>{{ e }}</td>
+      {% endfor %}
+    </tr>
+    {% endfor %}
+  </table>
+  </body>
+</html>

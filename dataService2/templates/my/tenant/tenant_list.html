@@ -1,0 +1,64 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+{% load staticfiles %}
+<title>项目列表</title>
+<link rel="stylesheet" type="text/css" href="{% static "css.css" %}"></link>
+<script type="text/javascript" src="{% static "js.js" %}"></script>
+</head>
+<body class="body">
+{% include '_head.html' %}
+  <div class="content">
+    <div class="sub_nav">
+      {% include 'my/_sub_nav.html' %}
+      <script language="javascript" type="text/javascript">
+      document.getElementById('sub1').style.cssText += "background:#FFFFFF;width:147px;border-bottom:#9bcff7 2px solid;";
+      </script>
+    </div>
+    <div class="contentBox">
+      {% include '_mes.html' %}
+      {% if projectList %}
+      <table border="1">
+        <tr>
+          <td colspan="4" align="center">当前参与的项目</td>
+          <td colspan="1" align="right">
+          {% if not master %}
+            <a href="/my/project/create/">创建新项目</a>&nbsp;
+          {% endif %}
+          <a href="/my/project/list/" >查看全部</a>
+          </td>
+        </tr>
+        <tr>
+          <td>项目名称</td>
+          <td>所任角色</td>
+          <td>创建时间</td>
+          <td>项目描述</td>
+          <td>操作</td>
+        </tr>
+        {% for pro in projectList %}
+        <tr>
+          <td>{{ pro.name }}</td>
+          <td>{{ pro.role }}</td>
+          <td>{{ pro.time }}</td>
+          <td>{{ pro.desc }}</td>
+          <td>
+              <a href="{{pro.url_s}}" >选择</a>
+              <a href="{{pro.url_m}}" >详情</a>
+              <a href="{{pro.url_d}}" >删除</a>
+          </td>
+        </tr>
+        {% endfor %}
+      </table>
+      {% else %}
+      当前帐号暂时没有参与的项目
+        {% if not master %}
+          <a href="/my/project/create/">创建新项目</a>&nbsp;
+        {% endif %}
+      {% endif %}
+    </div>
+  </div>
+</div>
+{% include '_foot.html' %}
+</body>
+</html>

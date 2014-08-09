@@ -1,0 +1,25 @@
+<p>购买的服务</p>
+<table width='100%'>
+	<tr>
+		<td>交易号</td>
+		<td>交易日期</td>
+		<td>客户</td>
+		<td>购买的产品</td>
+		<td>折扣</td>
+		<td>使用时间</td>
+		<td>数量</td>
+		<td>说明</td>
+	</tr>
+	{% for purchaseProduct in purchaseProducts %}
+	<tr>
+		<td>{{purchaseProduct.0}}</td>
+		<td>{{purchaseProduct.1}}</td>
+		<td>{{purchaseProduct.2}}</td>
+		<td>{{purchaseProduct.3}}</td>
+		<td>{{purchaseProduct.4}}</td>
+		<td>{{purchaseProduct.5}}</td>
+		<td>{{purchaseProduct.6}}</td>
+		<td>{{purchaseProduct.7}}</td>
+	</tr>
+	{% endfor %}
+</table>

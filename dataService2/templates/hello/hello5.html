@@ -1,0 +1,53 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+</head>
+<body>
+  <table>
+    <tr><td>accounts</td></tr>
+<!--    <tr>
+      <td>{{ p.SN }}</td>
+      <td>{{ p.LoginName }}</td>
+      <td>{{ p.LoginPass }}</td>
+      <td>{{ p.User }}</td>
+      <td>{{ p.Status }}</td>
+    </tr>-->
+    {% for item in accList %}
+    <tr>
+      <td>{{ item.SN }}</td>
+      <td>{{ item.LoginName }}</td>
+      <td>{{ item.LoginPass }}</td>
+      <td>{{ item.User }}</td>
+      <td>{{ item.Status }}</td>
+    </tr>
+    {% endfor %}
+  </table>
+
+  request_path:{{  request_path  }} <br/>
+  request.META.HTTP_USER_AGENT:{{  ua  }} <br/>
+
+  <table>
+    <tr><td>meta values</td></tr>
+    {% for k,v in meta_values %}
+      <tr>
+        <td>{{  k  }}</td><td>{{  v  }}</td>
+      </tr>
+    {% endfor %}
+  </table>
+  <br/>
+  <form action="/searchtest/" method="get">
+    <input type="text" name="q">
+    <input type="submit" value="Search">
+  </form>
+  <br/>
+  <form action="/contacttest/" method="post">
+    {% csrf_token %}
+    <p>Subject: <input type="text" name="subject"></p>
+    <p>Your e-mail (optional): <input type="text" name="email"></p>
+    <p>Message: <textarea name="message" rows="10" cols="50"></textarea></p>
+    <input type="submit" value="Submit">
+  </form>
+  <br/>
+</body>
+</html>

@@ -1,0 +1,42 @@
+<html>
+<head>
+	<meta charset="UTF-8"/>
+	<title>系统管理员等级列表</title>
+</head>
+<body>
+<center>
+<table width='70%' >
+	<tr>
+		<td>管理员级别</td>
+		<td>说明</td>
+		
+		<td></td>
+	</tr>
+	<form method="post" action="addAdminGroup">
+	<tr>
+		<td><input type="text" name="name" required="required"/></td>
+		<td><textarea rows="2" cols="30" name="comment">无</textarea></td>
+		<td><input type="submit" name="add" value="添加"/></td>
+	</tr>
+	</form>
+	{% for adminGroup in adminGroups %}
+	<tr>
+		<td>
+			{{adminGroup.name}}
+		</td>
+		<td>
+			{{adminGroup.comment}}
+		</td>
+		<td>
+			{% ifnotequal adminGroup.id "superAdmin" %}
+			
+			<a href='edit/{{adminGroup.id}}'>编辑</a>
+			<a href='del/{{adminGroup.id}}'>删除</a>
+			{% endifnotequal %}
+		</td>
+	</tr>
+	{% endfor %}
+</table>
+</center>
+</body>
+</html>

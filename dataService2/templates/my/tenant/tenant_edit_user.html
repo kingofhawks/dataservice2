@@ -1,0 +1,90 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+{% load staticfiles %}
+<title>个人首页</title>
+<link rel="stylesheet" type="text/css" href="{% static "css.css" %}"></link>
+<script type="text/javascript" src="{% static "js.js" %}"></script>
+</head>
+<body class="body">
+{% include '_head.html' %}
+  <div class="content">
+    <div class="sub_nav">
+      {% include 'my/_sub_nav.html' %}
+      <script language="javascript" type="text/javascript">
+      document.getElementById('sub1').style.cssText += "background:#FFFFFF;width:147px;border-bottom:#9bcff7 2px solid;";
+      </script>
+    </div>
+    <div class="contentBox">
+      {% include '_mes.html' %}
+      项目 {{ tenant }} 用户管理 :<br />
+      <table border="1">
+        <tr>
+          <td>用户名</td>
+          <td>已参与项目</td>
+          <td>所任角色</td>
+          <td>现有余额</td>
+          <td>加入/除去</td>
+          <td>角色</td>
+        </tr>
+        {% for user in userList %}
+          <tr>
+            <form action="/my/project/user/edit/submit/" method="POST">
+              <td>{{ user.loginName }}</td>
+              <td>
+                {% for t_i in user.tenants %}
+                  <p>{{ t_i }}</p>
+                {% endfor %}
+              </td>
+              <td>
+                {% for r_i in user.roles %}
+                  <p>{{ r_i }}</p>
+                {% endfor %}
+              </td>
+              <td>{{ user.balance }}</td>
+              {% if user.current_tenant %}
+                <td>
+                  已加入  
+                  <input type="submit" name="action" value="del"></input>
+                </td>
+                <td>
+                  <input type="text" name="userName" value="{{ user.loginName }}" style="display:none"></input>
+                  <input type="text" name="tenantName" value="{{ tenant }}" style="display:none"></input>
+                  <input type="text" name="roleSelect" value="{{ user.current_role }}" style="display:none"></input>
+                  {{ user.current_role }}
+                </td>
+                <!--<td>
+                  {{ user.desc }}
+                </td>-->
+              {% else %}
+                <td>
+                  未加入
+                  <input type="submit" name="action" value="add"></input>
+                </td>
+                <td>
+                  <input type="text" name="userName" value="{{ user.loginName }}" style="display:none"></input>
+                  <input type="text" name="tenantName" value="{{ tenant }}" style="display:none"></input>
+                  <select name="roleSelect">
+                    {% for r in sys_role_list %}
+                    <option value="{{ r.id }}">{{ r.name }}</option>
+                    {% endfor %}
+                  </select>
+                </td>
+              <!--<td>
+                <input type="text" name="desc"></input>
+              </td>-->
+              {% endif %}
+            </form>
+          </tr>
+          {% endfor %}
+<!--      <form  action="/project_user_role/add/submit/" class="" method="post">
+        {% csrf_token %}
+        <input type="submit" value="提交"></input>
+      </form>-->
+      </table>
+    </div>
+  </div>
+{% include '_foot.html' %}
+</body>
+</html>

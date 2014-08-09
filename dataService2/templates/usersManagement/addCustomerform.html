@@ -1,0 +1,63 @@
+<html>
+<head>
+	<meta charset="UTF-8"/>
+	<title>添加新客户</title>
+</head>
+<body>
+<center>
+	<form action="addCustomer" method="post">
+		<table width="70%">
+			<tr>
+				<td>客户名</td>
+				<td><input type="text" name="name"/></td>
+			</tr>
+			<tr>
+				<td>联系人</td>
+				<td><input type="text" name="contactName"/></td>
+			</tr>
+			<tr>
+				<td>联系人电话</td>
+				<td><input type="text" name="tel"/></td>
+			</tr>
+			<tr>
+				<td>联系人邮箱</td>
+				<td><input type="text" name="email"/></td>
+			</tr>
+			<tr>
+				<td>联系人身份证号</td>
+				<td><input type="text" name="identification"/></td>
+			</tr>
+			<tr>
+				<td>联系人地址</td>
+				<td><input type="text" name="address"/></td>
+			</tr>
+			<tr>
+				<td>联系人邮编</td>
+				<td><input type="text" name="post"/></td>
+			</tr>
+			<tr>
+				<td>是否是企业用户</td>
+				<td>
+					<select name="isEnterprise">
+						<option value="0" selected="selected">否</option>
+						<option value="1">是</option>
+					</select>
+				</td>
+			</tr>
+			<tr>
+				<td>客户等级</td>
+				<td>
+					{% for customerGroup in customerGroups %}
+					<input type='radio' name='customerGroup' value='{{customerGroup.id}}'/>{{customerGroup.name}}
+					{% endfor %}
+				</td>
+			</tr>
+			<tr>
+				<td></td>
+				<td><input type="submit" name="add" value="确定"/></td>
+			</tr>
+		</table>
+	</form>
+</center>
+</body>
+</html>

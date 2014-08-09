@@ -1,0 +1,67 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+{% load staticfiles %}
+<title>数据分析</title>
+<link rel="stylesheet" type="text/css" href="{% static "css.css" %}"></link>
+<script type="text/javascript" src="{% static "js.js" %}"></script>
+</head>
+<body class="body">
+{% include '_head.html' %}
+<div class="content">
+  <div class="sub_nav">
+      {% include 'dp/_sub_nav.html' %}
+      <script language="javascript" type="text/javascript">
+      document.getElementById('sub3').style.cssText += "background:#FFFFFF;width:148px;border-bottom:#9bcff7 2px solid;";
+      </script>
+  </div>
+  <div class="contentBox">
+    {% include '_mes.html' %}
+    path:
+    {% for p in parrent_path %}
+      <a href="{{ p.k }}">{{ p.v }}</a> /
+    {% endfor %}
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    <a href="/dataProcessing/algorithm/cart/" >查看当前算法库(已有{{ count }}个文件)</a>
+      <table>
+        <tr>
+          <td>名称</td>
+          <td>类型</td>
+          <td>大小</td>
+          <td>时间</td>
+          <td>操作</td>
+        </tr>
+        {% for folder in folder_list %}
+        <tr>
+          <td>{{ folder.name }}</td>
+          <td>{{ folder.type }}</td>
+          <td>{{ folder.byte }}</td>
+          <td>{{ folder.modified }}</td>
+          <td>
+            <a href="{{ folder.name }}" >进入</a>
+          </td>
+        </tr>
+        {% endfor %}
+        {% for file in file_list %}
+        <tr>
+          <!--<td><a href="{{ file.name }}/download/">{{ file.name }}</a></td>-->
+          <td>{{ file.name }}</td>
+          <td>{{ file.type }}</td>
+          <td>{{ file.byte }}</td>
+          <td>{{ file.modified }}</td>
+          <td>
+            <form action="/dataProcessing/algorithm/add/" method="POST">
+              <input type="text" name="containerName" value="{{ container_name }}" style="display:none;"></input>
+              <input type="text" name="filePath" value="{{ path }}" style="display:none;"></input>
+              <input type="text" name="fileName" value="{{ file.name }}" style="display:none;"></input>
+              <input type="submit" name="delete" value="加入算法库"></input>
+            </form>
+        </tr>
+        {% endfor %}
+      </table>
+  </div>
+</div>
+{% include '_foot.html' %}
+</body>
+</html>

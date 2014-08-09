@@ -1,0 +1,52 @@
+<html>
+<head>
+	<meta charset="UTF-8"/>
+	<title>产品详细信息</title>
+</head>
+<body>
+<center>
+<table width="70%">
+{% for product in productDetail %}
+	<tr>
+		<td>产品名称</td>
+		<td>{{product.1}}</td>
+	</tr>
+	<tr>
+		<td>产品种类</td>
+		<td>{{product.2}}</td>
+	</tr>
+	<tr>
+		<td>是否激活</td>
+		<td>
+			{% ifequal product.3 "0" %}
+			否
+			{% else %}
+			是
+			{% endifequal %}
+		</td>
+	</tr>
+	<tr>
+		<td>代码存放位置/endpoint</td>
+		<td>{{product.4}}</td>
+	</tr>
+	<tr>
+		<td>单价</td>
+		<td>{{product.5}}</td>
+	</tr>
+	<tr>
+		<td>单位</td>
+		<td>{{product.6}}</td>
+	</tr>
+	<tr>
+		<td>说明</td>
+		<td>{{product.7}}</td>
+	</tr>
+	<tr>
+		<td></td>
+		<td><input type="button" name="return" value="返回" onClick="history.back()"/></td>
+	</tr>
+{% endfor %}
+</table>
+</center>
+</body>
+</html>

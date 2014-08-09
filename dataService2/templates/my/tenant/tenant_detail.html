@@ -1,0 +1,76 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+{% load staticfiles %}
+<title>详细信息</title>
+<link rel="stylesheet" type="text/css" href="{% static "css.css" %}"></link>
+<script type="text/javascript" src="{% static "js.js" %}"></script>
+</head>
+<body class="body">
+{% include '_head.html' %}
+  <div class="content">
+    <div class="sub_nav">
+      {% include 'my/_sub_nav.html' %}
+      <script language="javascript" type="text/javascript">
+      document.getElementById('sub1').style.cssText += "background:#FFFFFF;width:147px;border-bottom:#9bcff7 2px solid;";
+      </script>
+    </div>
+    <div class="contentBox">
+      {% include '_mes.html' %}
+      <table border="1">
+        <tr>
+          <td>项目名称</td><td>{{ tenant.name }}</td>
+          <td>创建日期</td><td>{{ tenant.create_at }}</td>
+        </tr>
+        <tr>
+          <td>创建人</td><td>{{ tenant.owner }}</td>
+          <td>项目说明</td><td>{{ tenant.desc }}</td>
+        </tr>
+        <tr>
+          <td>项目id</td><td>{{ tenant.id }}</td>
+          <td>osid</td><td>{{ tenant.osid }}</td>
+        </tr>
+      </table>
+      <table border="1">
+        <tr>
+          <td colspan="4">项目中已有的用户</td>
+          {% if not master %}
+          <td>
+            <a href="/my/project/user/edit/?t={{ tenant.name }}">编辑用户</a>
+          </td>
+          {% endif %}
+        </tr>
+        <tr>
+          <td>用户名</td>
+          <td>项目角色</td>
+          <td>加入时间</td>
+          <td>说明</td>
+          {% if not master %}
+          <td>操作</td>
+          {% endif %}
+        </tr>
+        {% for user in tenant.users %}
+        <tr>
+          <td>{{ user.name }}</td>
+          <td>{{ user.role }}</td>
+          <td>{{ user.create_at }}</td>
+          <td>{{ user.desc }}</td>
+          {% if not master %}
+          <td>
+            <form action="/my/project/user/edit/submit/" method="POST">
+              <input type="text" name="userName" value="{{ user.name }}" style="display:none"></input>
+              <input type="text" name="tenantName" value="{{ tenant.name }}" style="display:none"></input>
+              <input type="text" name="roleSelect" value="{{ user.role }}" style="display:none"></input>
+              <input type="submit" name="action" value="del"></input>
+            </form>
+          </td>
+          {% endif %}
+        </tr>
+        {% endfor %}
+      </table>
+    </div>
+  </div>
+{% include '_foot.html' %}
+</body>
+</html>

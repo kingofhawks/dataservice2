@@ -1,0 +1,119 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+{% load staticfiles %}
+<title>虚拟主机</title>
+<link rel="stylesheet" type="text/css" href="{% static "css.css" %}"></link>
+<script type="text/javascript" src="{% static "js.js" %}"></script>
+</head>
+<body class="body">
+{% include '_head.html' %}
+<div class="content">
+  <div class="sub_nav">
+      {% include 'vh/_sub_nav.html' %}
+      <script language="javascript" type="text/javascript">
+      document.getElementById('sub3').style.cssText += "background:#FFFFFF;width:148px;border-bottom:#9bcff7 2px solid;";
+      </script>
+  </div>
+  <div class="contentBox">
+    {% include '_mes.html' %}
+    <table>
+      <tr>
+        <td>tenant_id</td>
+        <td>{{ serverDetail.name }}</td>
+      </tr>
+      <tr>
+        <td>id</td>
+        <td>{{ serverDetail.id }}</td>
+      </tr>
+      <tr>
+        <td>tenant_id</td>
+        <td>{{ serverDetail.tenant_id }}</td>
+      </tr>
+      <tr>
+        <td>user_id</td>
+        <td>{{ serverDetail.user_id }}</td>
+      </tr>
+      <tr>
+        <td>hostId</td>
+        <td>{{ serverDetail.hostId }}</td>
+      </tr>
+      <tr>
+        <td>accessIPv4</td>
+        <td>{{ serverDetail.accessIPv4 }}</td>
+      </tr>
+      <tr>
+        <td>accessIPv6</td>
+        <td>{{ serverDetail.accessIPv6 }}</td>
+      </tr>
+      <tr>
+        <td>addresses-private</td>
+        <td>
+        {% for add in serverDetail.addresses.private %}
+            {{ add.addr }}<br />
+        {% endfor %}
+        </td>
+      </tr>
+      <tr>
+        <td>created</td>
+        <td>{{ serverDetail.created }}</td>
+      </tr>
+      <tr>
+        <td>created</td>
+        <td>{{ serverDetail.created }}</td>
+      </tr>
+      <tr>
+        <td>updated</td>
+        <td>{{ serverDetail.updated }}</td>
+      </tr>
+      <tr>
+        <td>status</td>
+        <td>{{ serverDetail.status }}</td>
+      </tr>
+      <tr>
+        <td>key_name</td>
+        <td>{{ serverDetail.key_name }}</td>
+      </tr>
+      <tr>
+        <td>security_groups</td>
+        <td>
+        {% for group in serverDetail.security_groups %}
+            {{ group.name }}<br />
+        {% endfor %}
+        </td>
+      </tr>
+      <tr>
+        <td>metadata</td>
+        <td>
+        {% for metadata in serverDetail.metadata %}
+            {{ metadata }}<br />
+        {% endfor %}
+        </td>
+      </tr>
+      <tr>
+        <td>progress</td>
+        <td>{{ serverDetail.progress }}</td>
+      </tr>
+      <tr>
+        <td>image</td>
+        <td>{{ serverDetail.image.id }}</td>
+      </tr>
+      <tr>
+        <td>flavor</td>
+        <td>{{ serverDetail.flavor.id }}</td>
+      </tr>
+      <tr>
+        <td>config_drive</td>
+        <td>{{ serverDetail.config_drive }}</td>
+      </tr>
+      <!--<tr>
+        <td>accessIPv</td>
+        <td>{{ serverDetail.accessIPv }}</td>
+      </tr>-->
+    </table>
+  </div>
+</div>
+{% include '_foot.html' %}
+</body>
+</html>

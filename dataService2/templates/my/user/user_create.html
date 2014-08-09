@@ -1,0 +1,41 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+{% load staticfiles %}
+<title>创建用户</title>
+<link rel="stylesheet" type="text/css" href="{% static "css.css" %}"></link>
+<script type="text/javascript" src="{% static "js.js" %}"></script>
+</head>
+<body class="body">
+{% include '_head.html' %}
+  <div class="content">
+    <div class="sub_nav">
+      {% include 'my/_sub_nav.html' %}
+      <script language="javascript" type="text/javascript">
+      document.getElementById('sub1').style.cssText += "background:#FFFFFF;width:147px;border-bottom:#9bcff7 2px solid;";
+      </script>
+    </div>
+    <div class="contentBox">
+      {% include '_mes.html' %}
+      <form  action="/my/user/create/submit/" class="" method="post" onSubmit="return checkUserCreate('form');">
+        {% csrf_token %}
+        <div><label>子账户名</label>
+             <input type="text" id="userName" name="userName" onchange="checkUserCreate('userName')"></input>
+             <span id="e1"></span></div>
+        <div><label>登录密码</label>
+             <input type="password" id="userPass" name="userPass" onchange="checkUserCreate('userPass')"></input>
+             <span id="e2"></span></div>
+        <div><label>密码确认</label>
+             <input type="password" id="passConfirm" name="passConfirm" onchange="checkUserCreate('passConfirm')"></input>
+             <span id="e3"></span></div>
+        <div><label>电子邮箱</label>
+             <input type="text" id="userEmail" name="userEmail" onchange="checkUserCreate('userEmail')"></input>
+             <span id="e4"></span></div>
+        <input type="submit" value="创建子账户"></input>
+      </form>
+    </div>
+  </div>
+{% include '_foot.html' %}
+</body>
+</html>z

@@ -1,0 +1,48 @@
+<html>
+<head>
+	<title>套餐列表</title>
+</head>
+<body>
+<center>
+<form method='POST' action='addPackage'>
+<table widht='80'>
+	<tr>
+		<td>套餐名</td>
+		<td><input type='text' name='name' required="required"/></td>
+	</tr>
+	<tr>
+		<td>套餐内容</td>
+		<td>
+			{% for product in products %}
+			<input type="checkbox" name="productId" value='{{product.0}}'/>{{product.1}}
+			{% endfor %}
+		</td>
+	</tr>
+	<tr>
+		<td>使用时间</td>
+		<td><input type="text" name="timeLimit"/>/24h</td>
+	</tr>
+	<tr>
+		<td>单价</td>
+		<td><input type="number" step='any' name="price" required="required"/></td>
+	</tr>
+	<tr>
+		<td>是否激活</td>
+		<td>
+			<input type="radio" name="isActive" value='0'/>否
+			<input type="radio" name="isActive" value='1' checked/>是
+		</td>
+	</tr>
+	<tr>
+		<td>说明</td>
+		<td><textarea name="comment" rols="30" rows="2">无</textarea></td>
+	</tr>
+	<tr>
+		<td></td>
+		<td><input type="submit" name="add" value="添加"/></td>
+	</tr>
+</table>
+</form>
+</center>
+</body>
+</html>

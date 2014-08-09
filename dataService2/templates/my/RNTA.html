@@ -1,0 +1,36 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+{% load staticfiles %}
+<title>个人首页</title>
+<link rel="stylesheet" type="text/css" href="{% static "css.css" %}"></link>
+<script type="text/javascript" src="{% static "js.js" %}"></script>
+</head>
+<body class="body">
+{% include '_head.html' %}
+  <div class="content">
+    <div class="sub_nav">
+      {% include 'my/_sub_nav.html' %}
+      <script language="javascript" type="text/javascript">
+      document.getElementById('sub1').style.cssText += "background:#FFFFFF;width:147px;border-bottom:#9bcff7 2px solid;";
+      </script>
+    </div>
+    <div class="contentBox">
+      {% include '_mes.html' %}
+      <form  action="submit/" class="" method="post">
+      {% csrf_token %}
+      <label>真实姓名：</label><input type="text" name="name"></input><br />
+      <label>身份证号：</label><input type="text" name="idNo"></input><br />
+      <label>电子邮箱：</label><input type="text" name="email"></input><br />
+      <label>联系电话：</label><input type="text" name="mobile"></input><br />
+      <label>工作单位：</label><input type="text" name="company"></input><br />
+      <label>常驻地址：</label><input type="text" name="address"></input><br />
+      <input type="reset" value="清空"></input>
+      <input type="submit" value="提交"></input>
+      </form>
+    </div>
+  </div>
+{% include '_foot.html' %}
+</body>
+</html>

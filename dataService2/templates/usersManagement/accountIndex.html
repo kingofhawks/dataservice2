@@ -1,0 +1,53 @@
+<html>
+<head>
+	<meta charset="UTF-8"/>
+	<title>客户帐号列表</title>
+</head>
+<body>
+<center>
+<!--  
+<table width="100%">
+<form method='post' action='addCustomerAccount'>
+	<tr>
+		<td>支付密码：<input type='text' name='payKey'/></td>
+		<td>开户信息：<input type='text' name='openInfo'/></td>
+		<td>说明：<textarea rows='2' cols='20' name='comment'>无</textarea></td>
+		<td>
+			<input type='submit' name='add' value='添加'/>
+			<input type="hidden" name='customerId' value='{{id}}'/>
+		</td>	
+	</tr>
+</form>	
+</table>
+-->
+<table width='100%'>	
+	<tr>
+		<td>帐号ID</td>		
+		<td>开户信息</td>
+		<td>余额</td>
+		<td>开户时间</td>		
+		<td>注销时间</td>
+		<td>说明</td>
+		<td></td>
+	</tr>
+	{% for account in accounts %}
+	<form method="post" action="cancelAccount">
+	<tr>
+		<td>{{account.id}}</td>
+		<td>{{account.openInfo}}</td>
+		<td>{{account.balance}}</td>
+		<td>{{account.openDate}}</td>
+		<td>{{account.cancelDate}}</td>
+		<td>{{account.comment}}</td>
+		<td>
+			<input type="hidden" name="accountId" value='{{account.id}}'/>
+			
+			<!--  <input type="submit" name="cancel" value='注销'/>-->
+		</td>
+	</tr>
+	</form>
+	{% endfor %}	
+</table>
+</center>
+</body>
+</html>

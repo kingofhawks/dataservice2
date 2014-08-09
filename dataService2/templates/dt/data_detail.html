@@ -1,0 +1,43 @@
+{% extends 'dt/base_market.html' %}
+{% load staticfiles %}
+{% block main %}
+	<form enctype="multipart/form-data" action="/market/trade" method="get">{% csrf_token %}
+	      <label>名称：</label>{{ data.title }}<br />
+	      <label>描述：</label>{{ data.description }}<br />
+	      <label>发布者：</label>{{ data.creator }}<br />
+	      <label>发布时间：</label>{{ data.createdDate }}<br />
+	      <label>类别：</label>{{ data.category }}<br />
+	      <label>价格：</label>{{ data.price }}<br />	      
+	      <button type="submit" class="btn btn-primary">
+			  <i class="icon-white icon-shopping-cart"></i> 订阅
+		  </button>
+	      <div class="btn-group">
+			  <a class="btn dropdown-toggle btn-primary" data-toggle="dropdown" href="#">
+			    <i class="icon-white icon-download-alt"></i> 下载
+			    <span class="caret"></span>
+			  </a>
+			  <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu">
+                <li><a tabindex="-1" id="downloadLocal" href="#">下载到本地</a></li>
+                <li class="divider"></li>
+                <li><a tabindex="-1" id="saveToCloud" href="#">转存到云存储</a></li>
+              </ul>
+		 </div>
+	  </form>
+{% endblock %}
+{% block js %}
+{{ block.super }}
+<script type="text/javascript" src="{% static "js/jquery-2.0.1.min.js" %}"></script>
+<script type="text/javascript" src="{% static "js/bootstrap.min.js" %}"></script>
+
+<script type="text/javascript">
+	$('.dropdown-toggle').dropdown();
+	$('#downloadLocal').click(function (e) {
+		//TODO
+		window.location="/market/download?data=data_id"		 
+	})
+	$('#saveToCloud').click(function (e) {
+		//TODO
+		$.get('/market/download2cloud')
+	})
+</script>
+{% endblock %}

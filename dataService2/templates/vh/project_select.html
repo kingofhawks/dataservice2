@@ -1,0 +1,89 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+{% load staticfiles %}
+<title>选择项目</title>
+<link rel="stylesheet" type="text/css" href="{% static "css.css" %}"></link>
+<script type="text/javascript" src="{% static "js.js" %}"></script>
+</head>
+<body class="body">
+{% include '_head.html' %}
+<div class="content">
+  <div class="sub_nav">
+      {% include 'vh/_sub_nav.html' %}
+      <script language="javascript" type="text/javascript">
+      document.getElementById('sub1').style.cssText += "background:#FFFFFF;width:148px;border-bottom:#9bcff7 2px solid;";
+      </script>
+  </div>
+  <div class="contentBox">
+    {% include '_mes.html' %}
+    当前已选择项目名：{{ currentTenant }}<br />
+    当前身份认证指纹：{{ currentToken }}<br />
+    <div>
+      {% if projectList %}
+      <table>
+        <tr>
+          <td colspan="3" align="center">当前参与的项目</td>
+          <td colspan="2" align="right">
+          {% if master %}
+          {% else %}
+            <a href="/my/project/create/">创建新项目</a>&nbsp;
+          {% endif %}
+          <a href="/my/project/list/" >查看全部</a>
+          </td>
+        </tr>
+        <tr>
+          <td>项目名称</td>
+          <td>所任角色</td>
+          <td>创建时间</td>
+          <td>描述说明</td>
+          <td>操作</td>
+        </tr>
+        {% for pro in projectList %}
+        <tr>
+          <td>{{ pro.name }}</td>
+          <td>{{ pro.role }}</td>
+          <td>{{ pro.desc }}</td>
+          <td>{{ pro.time }}</td>
+          <td><a href="{{ pro.url_s }}" >选择</a></td>
+        </tr>
+        {% endfor %}
+      </table>
+      {% else %}
+      当前帐号暂时没有参与的项目<a href="/my/project/create/">创建新项目</a>
+      {% endif %}
+
+<!--    {% if projectList %}
+    <table>
+      <tr>
+        <td colspan="3" align="center">从已有项目中选择</td>
+        <td colspan="2" align="right">
+        <a href="/my/project/create/">创建新项目</a>&nbsp;
+        <a href="/my/project/list/" >查看全部</a>
+        </td>
+      </tr>
+      <tr>
+        <td>项目名称</td>
+        <td>所任角色</td>
+        <td>项目描述</td>
+        <td>操作</td>
+      </tr>
+      {% for peoject in projectList %}
+      <tr>
+        <td>{{ peoject.name }}</td>
+        <td>{{ peoject.role }}</td>
+        <td>{{ peoject.desc }}</td>
+        <td><a href="{{peoject.url_s}}" >选择</a></td>
+      </tr>
+      {% endfor %}
+    </table>
+    {% else %}
+    当前帐号暂时没有参与的项目<a href="/my/project/create/">创建新项目</a>
+    {% endif %}-->
+    </div>
+  </div>
+</div>
+{% include '_foot.html' %}
+</body>
+</html>

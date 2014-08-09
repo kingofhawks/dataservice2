@@ -1,0 +1,47 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+{% load staticfiles %}
+<title>数据分析</title>
+<link rel="stylesheet" type="text/css" href="{% static "css.css" %}"></link>
+<script type="text/javascript" src="{% static "js.js" %}"></script>
+<script type="text/javascript" >
+function refresh(dpid)
+{
+  //alert(dpid);
+  var xmlhttp;
+  if (window.XMLHttpRequest)
+  {// code for IE7+, Firefox, Chrome, Opera, Safari
+  xmlhttp=new XMLHttpRequest();
+  }
+  else
+  {// code for IE6, IE5
+    xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+  }
+  xmlhttp.open("GET","/dataProcessing/monitor/"+dpid+"/status/",false);
+  xmlhttp.send();
+  document.getElementById("monitorWindow").innerHTML=xmlhttp.responseText;
+  setTimeout("refresh("+dpid+")", 3000);
+}
+</script>
+</head>
+<body class="body" onload="refresh({{ dpid }})">
+{% include '_head.html' %}
+<div class="content">
+  <div class="sub_nav">
+      {% include 'dp/_sub_nav.html' %}
+      <script language="javascript" type="text/javascript">
+      document.getElementById('sub4').style.cssText += "background:#FFFFFF;width:148px;border-bottom:#9bcff7 2px solid;";
+      </script>
+  </div>
+  <div class="contentBox">
+    {% include '_mes.html' %}
+    dpid:{{ dpid }}
+    <div id="monitorWindow" >
+    </div>
+  </div>
+</div>
+{% include '_foot.html' %}
+</body>
+</html>
